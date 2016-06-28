@@ -1,0 +1,190 @@
+﻿@using DarkSoulsII.Areas.DS3.ViewModels;
+
+@*@model WeaponViewModel*@
+@{
+    ViewBag.Title = "Planner";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        startingClassChanged();
+    });
+
+    function startingClassChanged() {
+        $.ajax({
+            url: 'Planner/ChangeStartingClass',
+            type: 'GET',
+            data: { startingClassId: $('#startingClassId').val() },
+            success: function (response) {
+                $('#vgr').val(response.Vigor);
+                $('#att').val(response.Attunement);
+                $('#end').val(response.Endurance);
+                $('#vit').val(response.Vitality);
+                $('#str').val(response.Strength);
+                $('#dex').val(response.Dexterity);
+                $('#int').val(response.Intelligence);
+                $('#fth').val(response.Faith);
+                $('#lck').val(response.Luck);
+            },
+            complete: function () {
+
+            }
+        });
+    }
+</script>
+
+<h4>Character Planner</h4>
+
+<div class="form-group row">
+    <label class="col-sm-3">Starting Class:</label>
+    <div class="col-sm-5">@Html.DropDownList("startingClassId", ViewBag.StartingClasses as IEnumerable<SelectListItem>, new { onchange = "startingClassChanged();" })</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Attributes</div>
+            <div class="panel-body">
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <div class="col-sm-6">Vigor</div><div class="col-sm-5">@Html.TextBox("vgr", ViewBag.Vigor as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">Attunement</div><div class="col-sm-5">@Html.TextBox("att", ViewBag.Attunement as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">Endurance</div><div class="col-sm-5">@Html.TextBox("end", ViewBag.Endurance as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">Vitality</div><div class="col-sm-5">@Html.TextBox("vit", ViewBag.Vitality as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group row">
+                        <div class="col-sm-6">Strength</div><div class="col-sm-5">@Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">Dexterity</div><div class="col-sm-5">@Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">Intelligence</div><div class="col-sm-5">@Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">Faith</div><div class="col-sm-5">@Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">Luck</div><div class="col-sm-5">@Html.TextBox("lck", ViewBag.Luck as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Weapons <span style="float:right;">@Html.ActionLink("Weapon Search", "Index", "Weapons")</span></div>
+            <div class="panel-body">
+                <div class="form-group row">
+                    <label class="col-sm-12">Right Weapon 1:</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">@Html.DropDownList("rWeapon1Infusion", ViewBag.InfusionTypes as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-6">@Html.DropDownList("rWeapon1", ViewBag.Weapons as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-4">@Html.DropDownList("rWeapon1Upgrade", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12">Right Weapon 2:</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">@Html.DropDownList("rWeapon2Infusion", ViewBag.InfusionTypes as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-6">@Html.DropDownList("rWeapon2", ViewBag.Weapons as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-4">@Html.DropDownList("rWeapon2Upgrade", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12">Right Weapon 3:</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">@Html.DropDownList("rWeapon3Infusion", ViewBag.InfusionTypes as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-6">@Html.DropDownList("rWeapon3", ViewBag.Weapons as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-4">@Html.DropDownList("rWeapon3Upgrade", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12">Left Weapon 1:</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">@Html.DropDownList("lWeapon1Infusion", ViewBag.InfusionTypes as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-6">@Html.DropDownList("lWeapon1", ViewBag.Weapons as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-4">@Html.DropDownList("lWeapon1Upgrade", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12">Left Weapon 2:</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">@Html.DropDownList("lWeapon2Infusion", ViewBag.InfusionTypes as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-6">@Html.DropDownList("lWeapon2", ViewBag.Weapons as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-4">@Html.DropDownList("lWeapon2Upgrade", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12">Left Weapon 3:</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">@Html.DropDownList("lWeapon3Infusion", ViewBag.InfusionTypes as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-6">@Html.DropDownList("lWeapon3", ViewBag.Weapons as IEnumerable<SelectListItem>)</div>
+                    <div class="col-sm-4">@Html.DropDownList("lWeapon3Upgrade", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Armor <span style="float:right;">@Html.ActionLink("Armor Search", "Index", "Armor")</span></div>
+            <div class="panel-body">
+                <div class="form-group row">
+                    <label class="col-sm-3">Helm:</label>
+                    <div class="col-sm-7">@Html.DropDownList("helm", ViewBag.Helms as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Chest:</label>
+                    <div class="col-sm-7">@Html.DropDownList("chest", ViewBag.Chests as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Gauntlets:</label>
+                    <div class="col-sm-7">@Html.DropDownList("guantlet", ViewBag.Gauntlets as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Leggings:</label>
+                    <div class="col-sm-7">@Html.DropDownList("legging", ViewBag.Leggings as IEnumerable<SelectListItem>)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Rings</div>
+            <div class="panel-body">
+                <div class="form-group row">
+                    <label class="col-sm-3">Ring 1:</label>
+                    <div class="col-sm-7">@Html.DropDownList("ring1", ViewBag.Rings as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Ring 2:</label>
+                    <div class="col-sm-7">@Html.DropDownList("ring2", ViewBag.Rings as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Ring 3:</label>
+                    <div class="col-sm-7">@Html.DropDownList("ring3", ViewBag.Rings as IEnumerable<SelectListItem>)</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Ring 4:</label>
+                    <div class="col-sm-7">@Html.DropDownList("ring4", ViewBag.Rings as IEnumerable<SelectListItem>)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

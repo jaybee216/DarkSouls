@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Dark Souls</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryUI")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/Scripts/knockout-3.3.0.js")*@
+    @Scripts.Render("~/bundles/datatables")
+    @*@Scripts.Render("~/Scripts/Shared/layout.js")*@
+    @*<script type="text/javascript" src="js/bootstrap/bootstrap-dropdown.js"></script>*@
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-toggle').dropdown()
+        });
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="button btn-navbar" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            @*<div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Weapons", "Weapons", "Equipment", new { area = "" }, new { })</li>
+                        <li>@Html.ActionLink("AR Calculator", "ARCalculator", "Equipment", new { area = "" }, new { })</li>
+
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
+                                <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                        }
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>*@
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dark Souls III</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("AR Calculator", "ARCalculator", "Weapons", new { area = "DS3" }, null)</li>
+                            <li>@Html.ActionLink("Weapon Search", "Index", "Weapons", new { area = "DS3" }, null)</li>
+                            <li>@Html.ActionLink("Armor Search", "Index", "Armor", new { area = "DS3" }, null)</li>
+                            <li>@Html.ActionLink("Character Planner", "Index", "Planner", new { area = "DS3" }, null)</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dark Souls II</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Weapons", "Weapons", "Equipment", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("AR Calculator", "ARCalculator", "Equipment", new { area = "" }, new { })</li>
+                        </ul>
+                    </li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin</a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Roles", "Index", "RolesAdmin", new { area = "" }, new { })</li>
+                                <li>@Html.ActionLink("Users", "Index", "UsersAdmin", new { area = "" }, new { })</li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

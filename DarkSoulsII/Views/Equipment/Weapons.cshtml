@@ -1,0 +1,97 @@
+﻿@model List<DarkSoulsII.ViewModels.Weapon>
+@{
+    ViewBag.Title = "Weapons";
+    int? categoryId = ViewBag.CategoryId;
+    string search = ViewBag.Search;
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#weaponResults').DataTable();
+    });
+
+    // Reset the page to 1 and submit the form.
+    function searchChanged() {
+        document.weaponForm.submit();
+    }
+</script>
+
+@using (Html.BeginForm("Weapons", "Equipment", FormMethod.Get, new { name = "weaponForm", @class = "form" }))
+{
+    <div class="table-responsive">
+        <table class="table table-bordered" cellspacing="0">
+            <tr>
+                <td>Category:</td>
+                <td>@Html.DropDownList("categoryId", ViewBag.WeaponCategories as IEnumerable<SelectListItem>, new { onchange = "searchChanged();" })</td>
+            </tr>
+            <tr>
+                <td>STR Requirement:</td>
+                <td>@Html.TextBox("minStr", ViewBag.MinimumSTR as int?, new { type = "number", min = "0" })</td>
+                <td>DEX Requirement:</td>
+                <td>@Html.TextBox("minDex", ViewBag.MinimumDEX as int?, new { type = "number", min = "0" })</td>
+            </tr>
+            <tr>
+                <td>INT Requirement:</td>
+                <td>@Html.TextBox("minInt", ViewBag.MinimumINT as int?, new { type = "number", min = "0" })</td>
+                <td>FTH Requirement:</td>
+                <td>@Html.TextBox("minFth", ViewBag.MinimumFTH as int?, new { type = "number", min = "0" })</td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    @*@Html.TextBox("search", null, new { autocomplete = "off" })*@
+    @: &nbsp; <input type="submit" value="Search" onclick="searchChanged();" />
+}
+
+<div class="table-responsive">
+    <table id="weaponResults" class="table table-striped table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Base Phys</td>
+                <td>Base Mag</td>
+                <td>Base Fire</td>
+                <td>Base Lgn</td>
+                <td>Base Dark</td>
+                <td><img src="~/Content/Images/STR.png" /></td>
+                <td>Req DEX</td>
+                <td>Req INT</td>
+                <td>Req FTH</td>
+                <td>STR Scaling</td>
+                <td>DEX Scaling</td>
+                <td>Mag Scaling</td>
+                <td>Fire Scaling</td>
+                <td>Lgn Scaling</td>
+                <td>Dark Scaling</td>
+                <td>Weight</td>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (DarkSoulsII.ViewModels.Weapon w in Model)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(String.Format("{0} (+{1})", w.Name, w.MaxUpgrade), "WeaponDetails", new { id = w.WeaponId })</td>
+                        <td>@w.BasePhysical</td>
+                        <td>@w.BaseMagic</td>
+                        <td>@w.BaseFire</td>
+                        <td>@w.BaseLightning</td>
+                        <td>@w.BaseDark</td>
+                        <td>@w.StrReq</td>
+                        <td>@w.DexReq</td>
+                        <td>@w.IntReq</td>
+                        <td>@w.FthReq</td>
+                        <td>@w.StrScaling%</td>
+                        <td>@w.DexScaling%</td>
+                        <td>@w.MagicScaling%</td>
+                        <td>@w.FireScaling%</td>
+                        <td>@w.LightningScaling%</td>
+                        <td>@w.DarkScaling%</td>
+                        <td>@w.Weight</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

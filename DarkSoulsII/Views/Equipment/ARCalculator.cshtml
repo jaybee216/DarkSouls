@@ -1,0 +1,71 @@
+﻿@model List<DS2Weapon>
+@{
+    ViewBag.Title = "AR Calculator";
+    int? categoryId = ViewBag.CategoryId;
+    int? weaponId = ViewBag.WeaponId;
+    int? infusionId = ViewBag.InfusionId;
+    int? STR = ViewBag.STR;
+    int? DEX = ViewBag.DEX;
+    int? INT = ViewBag.INT;
+    int? FTH = ViewBag.FTH;
+}
+
+<script type="text/javascript">
+    // Populate the list of weapons
+    function categoryChanged() {
+        $('#weaponId').val(null);
+        document.weaponForm.submit();
+    }
+
+    function weaponChanged() {
+        document.weaponForm.submit();
+    }
+
+    function CalculateAR() {
+        document.weaponForm.submit();
+    }
+</script>
+
+<div>
+    @using (Html.BeginForm("ARCalculator", "Equipment", FormMethod.Get, new { name = "weaponForm", @class = "form" }))
+    {
+        <table>
+            <tr>
+                <td>Category:</td>
+                <td>@Html.DropDownList("categoryId", ViewBag.WeaponCategories as IEnumerable<SelectListItem>, new { onchange = "categoryChanged();" })</td>
+            </tr>
+            <tr>
+                <td>Weapon:</td>
+                <td>@Html.DropDownList("weaponId", ViewBag.Weapons as IEnumerable<SelectListItem>, new { onchange = "weaponChanged();" })</td>
+            </tr>
+            <tr>
+                <td>Infusion:</td>
+                <td>@Html.DropDownList("infusionId", ViewBag.Infusions as IEnumerable<SelectListItem>)</td>
+            </tr>
+            <tr>
+                <td>STR:</td>
+                @*<td><input type="number" min="1" name="STR" /></td>*@
+                <td>@Html.TextBox("STR", ViewBag.STR as int?, new { type = "number", step = "1" })</td>
+            </tr>
+            <tr>
+                <td>DEX:</td>
+                @*<td><input type="number" min="1" name="DEX" /></td>*@
+                <td>@Html.TextBox("DEX", ViewBag.DEX as int?, new { type = "number", step = "1" })</td>
+            </tr>
+            <tr>
+                <td>INT:</td>
+                @*<td><input type="number" min="1" name="INT" /></td>*@
+                <td>@Html.TextBox("INT", ViewBag.INT as int?, new { type = "number", step = "1" })</td>
+            </tr>
+            <tr>
+                <td>FTH:</td>
+                @*<td><input type="number" min="1" name="FTH" /></td>*@
+                <td>@Html.TextBox("FTH", ViewBag.FTH as int?, new { type = "number", step = "1" })</td>
+            </tr>
+        </table>
+        <br />
+        <input type="button" value="Calculate" onClick="CalculateAR()" />
+    }
+
+    <p>Total AR: @ViewBag.TotalAR</p>
+</div>

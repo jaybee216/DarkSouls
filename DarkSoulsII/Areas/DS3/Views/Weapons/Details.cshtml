@@ -1,0 +1,144 @@
+﻿@using DarkSoulsII.Areas.DS3.ViewModels;
+
+@model WeaponDetailsView
+@{
+    ViewBag.Title = Model.Normal.Name;
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#normalStatsTable').DataTable({
+            "searching": false,
+            "paging": false,
+            "info": false,
+            "ordering": false
+        });
+        $('#infusionStatsTable').DataTable({
+            "searching": false,
+            "paging": false,
+            "info": false
+        });
+    });
+</script>
+
+<h2>@Model.Normal.Name (+@(Model.Normal.UpgradePath == "Normal" ? Model.Normal.UpgradeLevel : Model.Normal.UpgradeLevel / 2))</h2>
+
+<div class="panel panel-default" style="width:50%;">
+    <div class="panel-heading">Details</div>
+    <div class="panel-body">
+        <div class="col-sm-6">
+            <div class="row">
+                <label class="col-sm-6">Requirements:</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-1"><img src="~/Content/Images/STR.png" /> @Model.Normal.StrReq</div>
+                <div class="col-sm-1"><img src="~/Content/Images/DEX.png" /> @Model.Normal.DexReq</div>
+                <div class="col-sm-1"><img src="~/Content/Images/INT.png" /> @Model.Normal.IntReq</div>
+                <div class="col-sm-1"><img src="~/Content/Images/FTH.png" /> @Model.Normal.FthReq</div>
+            </div>
+        </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <label>Weight: @Model.Normal.Weight</label>
+                </div>
+                <div class="row">
+                    <label>Upgrade Path: @Model.Normal.UpgradePath</label>
+                </div>
+            </div>
+       
+    </div>
+</div>
+
+<h3>Weapon Stats:</h3>
+<div class="table-responsive">
+    <table id="normalStatsTable" class="table table-striped table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <td colspan="1"></td>
+                <td colspan="5" style="text-align:center;"><label>Base Damage</label></td>
+                <td colspan="4" style="text-align:center;"><label>Scaling</label></td>
+            </tr>
+            <tr>
+                <td><label>Name</label></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Phys.png" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Magic.png" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Fire.png" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Lightning.png" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Dark.png" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/STR.png" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/DEX.png" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/INT.png" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/FTH.png" /></td>
+                @*<td><img src="~/Content/Images/LCK.png" /></td>*@
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Normal.Name</td>
+                <td class="col-weapon-details-stats">@Model.Normal.Physical</td>
+                <td class="col-weapon-details-stats">@Model.Normal.Magic</td>
+                <td class="col-weapon-details-stats">@Model.Normal.Fire</td>
+                <td class="col-weapon-details-stats">@Model.Normal.Lightning</td>
+                <td class="col-weapon-details-stats">@Model.Normal.Dark</td>
+                <td class="col-weapon-details-stats">@Model.Normal.StrScaling%</td>
+                <td class="col-weapon-details-stats">@Model.Normal.DexScaling%</td>
+                <td class="col-weapon-details-stats">@Model.Normal.IntScaling%</td>
+                <td class="col-weapon-details-stats">@Model.Normal.FthScaling%</td>
+                @*<td>@Model.Normal.LckScaling%</td>*@
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3>Infusion Stats:</h3>
+@if (Model.Infusions == null || Model.Infusions.Count == 0)
+{
+    <p>
+        This weapon cannot be infused.
+    </p>
+}
+else
+{
+    <div class="table-responsive">
+        <table id="infusionStatsTable" class="table table-striped table-bordered" cellspacing="0">
+            <thead>
+                <tr>
+                    <td colspan="1"></td>
+                    <td colspan="5" style="text-align:center;"><label>Base Damage</label></td>
+                    <td colspan="4" style="text-align:center;"><label>Scaling</label></td>
+                </tr>
+                <tr>
+                    <td><label>Infusion</label></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Phys.png" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Magic.png" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Fire.png" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Lightning.png" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Dark.png" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/STR.png" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/DEX.png" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/INT.png" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/FTH.png" /></td>
+                    @*<td><img src="~/Content/Images/LCK.png" /></td>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (WeaponViewModel w in Model.Infusions)
+                {
+                    <tr>
+                        <td>@w.Infusion @w.Name</td>
+                        <td class="col-weapon-details-stats">@w.Physical</td>
+                        <td class="col-weapon-details-stats">@w.Magic</td>
+                        <td class="col-weapon-details-stats">@w.Fire</td>
+                        <td class="col-weapon-details-stats">@w.Lightning</td>
+                        <td class="col-weapon-details-stats">@w.Dark</td>
+                        <td class="col-weapon-details-stats">@w.StrScaling%</td>
+                        <td class="col-weapon-details-stats">@w.DexScaling%</td>
+                        <td class="col-weapon-details-stats">@w.IntScaling%</td>
+                        <td class="col-weapon-details-stats">@w.FthScaling%</td>
+                        @*<td>@w.LckScaling%</td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

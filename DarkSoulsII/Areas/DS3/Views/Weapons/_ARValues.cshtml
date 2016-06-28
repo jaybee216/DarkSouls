@@ -1,0 +1,42 @@
+﻿@using DarkSoulsII.Areas.DS3.ViewModels;
+
+@model WeaponARModel
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#arResultsTable').DataTable({
+            "searching": false,
+            "paging": false,
+            "info": false,
+            "ordering": false
+        });
+    });
+</script>
+
+<div class="table-responsive">
+    <table id="arResultsTable" class="table table-striped table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <td colspan="1"><label></label></td>
+                <td colspan="1"><label>Total AR</label></td>
+                <td colspan="1"><label>Physical</label></td>
+                <td colspan="1"><label>Magic</label></td>
+                <td colspan="1"><label>Fire</label></td>
+                <td colspan="1"><label>Lightning</label></td>
+                <td colspan="1"><label>Dark</label></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @*<td>@Html.ActionLink(Model.WeaponName, "Details", new { weaponId = Model.WeaponId, upgradeLevel = Model.UpgradeLevel })</td>*@
+                <td>@Model.WeaponName</td>
+                <td>@Model.TotalAR.ToString("F")</td>
+                <td>@Model.PhysAR.ToString("F")</td>
+                <td>@Model.MagicAR.ToString("F")</td>
+                <td>@Model.FireAR.ToString("F")</td>
+                <td>@Model.LightningAR.ToString("F")</td>
+                <td>@Model.DarkAR.ToString("F")</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
