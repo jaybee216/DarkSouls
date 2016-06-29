@@ -35,5 +35,12 @@ namespace DarkSoulsII.Areas.DS3.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Details(int armorId)
+        {
+            ArmorViewModel armor = _armorHelper.ArmorSearch(armorId: armorId).Single();
+            return View(armor);
+        }
     }
 }

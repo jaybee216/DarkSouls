@@ -373,6 +373,7 @@
     <Content Include="Areas\DS3\Views\Weapons\ARCalculator.cshtml" />
     <Content Include="Areas\DS3\Views\Planner\Index.cshtml" />
     <Content Include="Areas\DS3\Views\Armor\Index.cshtml" />
+    <Content Include="Areas\DS3\Views\Armor\Details.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

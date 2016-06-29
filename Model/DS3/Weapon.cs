@@ -15,6 +15,7 @@ namespace Model.DS3
         public int IntReq { get; set; }
         public int FthReq { get; set; }
         public decimal Weight { get; set; }
+        public int? Critical { get; set; }
         public int? UpgradePathId { get; set; }
         public bool CanInfuse { get; set; }
 

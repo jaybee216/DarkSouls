@@ -3,6 +3,10 @@
 @model WeaponDetailsView
 @{
     ViewBag.Title = Model.Normal.Name;
+    string normalizedName = Model.Normal.Name.Replace(" ", "-").Replace("'", "");
+    string imageLink = String.Format("http://darksouls3.wdfiles.com/local--files/image-set-equipment:{0}/{1}.png", 
+                                        normalizedName.ToLower(),
+                                        normalizedName);
 }
 
 <script type="text/javascript">
@@ -21,34 +25,42 @@
     });
 </script>
 
-<h2>@Model.Normal.Name (+@(Model.Normal.UpgradePath == "Normal" ? Model.Normal.UpgradeLevel : Model.Normal.UpgradeLevel / 2))</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <h2>@Model.Normal.Name (+@(Model.Normal.UpgradePath == "Normal" ? Model.Normal.UpgradeLevel : Model.Normal.UpgradeLevel / 2))</h2>
 
-<div class="panel panel-default" style="width:50%;">
-    <div class="panel-heading">Details</div>
-    <div class="panel-body">
-        <div class="col-sm-6">
-            <div class="row">
-                <label class="col-sm-6">Requirements:</label>
-            </div>
-            <div class="row">
-                <div class="col-sm-1"><img src="~/Content/Images/STR.png" /> @Model.Normal.StrReq</div>
-                <div class="col-sm-1"><img src="~/Content/Images/DEX.png" /> @Model.Normal.DexReq</div>
-                <div class="col-sm-1"><img src="~/Content/Images/INT.png" /> @Model.Normal.IntReq</div>
-                <div class="col-sm-1"><img src="~/Content/Images/FTH.png" /> @Model.Normal.FthReq</div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Details</div>
+            <div class="panel-body">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <label class="col-sm-6">Requirements:</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Model.Normal.StrReq</div>
+                        <div class="col-sm-1"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Model.Normal.DexReq</div>
+                        <div class="col-sm-1"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Model.Normal.IntReq</div>
+                        <div class="col-sm-1"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Model.Normal.FthReq</div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <label>Weight:</label> @Model.Normal.Weight
+                    </div>
+                    <div class="row">
+                        <label>Critical:</label> @Model.Normal.Critical
+                    </div>
+                    <div class="row">
+                        <label>Upgrade Path:</label> @Model.Normal.UpgradePath
+                    </div>
+                </div>
             </div>
         </div>
-            <div class="col-sm-6">
-                <div class="row">
-                    <label>Weight: @Model.Normal.Weight</label>
-                </div>
-                <div class="row">
-                    <label>Upgrade Path: @Model.Normal.UpgradePath</label>
-                </div>
-            </div>
-       
+    </div>
+    <div class="col-sm-6">
+        <img src="@imageLink" style="width: 250px;" />
     </div>
 </div>
-
 <h3>Weapon Stats:</h3>
 <div class="table-responsive">
     <table id="normalStatsTable" class="table table-striped table-bordered" cellspacing="0">
@@ -60,15 +72,15 @@
             </tr>
             <tr>
                 <td><label>Name</label></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Phys.png" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Magic.png" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Fire.png" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Lightning.png" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Dark.png" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/STR.png" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/DEX.png" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/INT.png" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/FTH.png" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Phys.png" data-toggle="tooltip" title="Physical" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Magic.png" data-toggle="tooltip" title="Magic" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Fire.png" data-toggle="tooltip" title="Fire" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Lightning.png" data-toggle="tooltip" title="Lightning" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Dark.png" data-toggle="tooltip" title="Dark" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /></td>
                 @*<td><img src="~/Content/Images/LCK.png" /></td>*@
             </tr>
         </thead>
@@ -109,15 +121,15 @@ else
                 </tr>
                 <tr>
                     <td><label>Infusion</label></td>
-                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Phys.png" /></td>
-                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Magic.png" /></td>
-                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Fire.png" /></td>
-                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Lightning.png" /></td>
-                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Dark.png" /></td>
-                    <td class="col-weapon-details-stats"><img src="~/Content/Images/STR.png" /></td>
-                    <td class="col-weapon-details-stats"><img src="~/Content/Images/DEX.png" /></td>
-                    <td class="col-weapon-details-stats"><img src="~/Content/Images/INT.png" /></td>
-                    <td class="col-weapon-details-stats"><img src="~/Content/Images/FTH.png" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Phys.png" data-toggle="tooltip" title="Physical" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Magic.png" data-toggle="tooltip" title="Magic" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Fire.png" data-toggle="tooltip" title="Fire" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Lightning.png" data-toggle="tooltip" title="Lightning" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/Dark.png" data-toggle="tooltip" title="Dark" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /></td>
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /></td>
                     @*<td><img src="~/Content/Images/LCK.png" /></td>*@
                 </tr>
             </thead>

@@ -80,10 +80,10 @@
                             <label class="col-sm-6">Max Requirements:</label>
                         </div>
                         <div class="row">
-                            <div class="col-sm-3"><img src="~/Content/Images/STR.png" /> @Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                            <div class="col-sm-3"><img src="~/Content/Images/DEX.png" /> @Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                            <div class="col-sm-3"><img src="~/Content/Images/INT.png" /> @Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                            <div class="col-sm-3"><img src="~/Content/Images/FTH.png" /> @Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                            <div class="col-sm-3"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                            <div class="col-sm-3"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                            <div class="col-sm-3"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                            <div class="col-sm-3"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -91,9 +91,9 @@
                         <div class="col-sm-3">@Html.TextBox("weight", ViewBag.Weight as decimal?, new { type = "number", min = "0", style = "width:100%;" })</div>
                     </div>
                     @*<div class="form-group row">
-                        <label class="col-sm-3">Upgrade Path:</label>
-                        <div class="col-sm-3">@Html.DropDownList("upgradePath", ViewBag.UpgradePaths as IEnumerable<SelectListItem>, new { onchange = "searchChanged();", style = "width:100%;" })</div>
-                    </div>*@
+                            <label class="col-sm-3">Upgrade Path:</label>
+                            <div class="col-sm-3">@Html.DropDownList("upgradePath", ViewBag.UpgradePaths as IEnumerable<SelectListItem>, new { onchange = "searchChanged();", style = "width:100%;" })</div>
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -115,22 +115,22 @@
             </tr>
             <tr>
                 <td><label>Name</label></td>
-                
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/Phys.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/Magic.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/Fire.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/Lightning.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/Dark.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/STR.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/DEX.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/INT.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/FTH.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/STR.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/DEX.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/INT.png" /></td>
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/FTH.png" /></td>
+
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/Phys.png" data-toggle="tooltip" title="Physical" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/Magic.png" data-toggle="tooltip" title="Magic" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/Fire.png" data-toggle="tooltip" title="Fire" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/Lightning.png" data-toggle="tooltip" title="Lightning" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/Dark.png" data-toggle="tooltip" title="Dark" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /></td>
                 @*<td  class="col-weapon-search-stats"><img src="~/Content/Images/LCK.png" /></td>*@
-                <td class="col-weapon-search-stats"><img src="~/Content/Images/Weight.png" /></td>
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/Weight.png" data-toggle="tooltip" title="Weight" /></td>
                 @*<td><label>Upgrade</label></td>*@
             </tr>
         </thead>

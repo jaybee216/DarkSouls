@@ -1,0 +1,72 @@
+﻿@using DarkSoulsII.Areas.DS3.ViewModels;
+
+@model ArmorViewModel
+@{
+    ViewBag.Title = Model.Name;
+    string normalizedName = Model.Name.Replace(" ", "-").Replace("'", "");
+    string imageLink = String.Format("http://darksouls3.wdfiles.com/local--files/{0}/{1}.png", 
+                                        normalizedName.ToLower(),
+                                        Model.Name);
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#statsTable').DataTable({
+            "searching": false,
+            "paging": false,
+            "info": false,
+            "ordering": false
+        });
+    });
+</script>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h2>@Model.Name</h2>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Details</div>
+            <div class="panel-body">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <label>Weight:</label> @Model.Weight
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <img src="@imageLink" style="width: 250px;" />
+    </div>
+</div>
+<h3>Armor Stats:</h3>
+<div class="table-responsive">
+    <table id="statsTable" class="table table-striped table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <td colspan="1"></td>
+                <td colspan="5" style="text-align:center;"><label>Defenses</label></td>
+            </tr>
+            <tr>
+                <td><label>Name</label></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Phys.png" data-toggle="tooltip" title="Physical" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Magic.png" data-toggle="tooltip" title="Magic" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Fire.png" data-toggle="tooltip" title="Fire" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Lightning.png" data-toggle="tooltip" title="Lightning" /></td>
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/Dark.png" data-toggle="tooltip" title="Dark" /></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Name</td>
+                <td class="col-weapon-details-stats">@Model.Physical</td>
+                <td class="col-weapon-details-stats">@Model.Magic</td>
+                <td class="col-weapon-details-stats">@Model.Fire</td>
+                <td class="col-weapon-details-stats">@Model.Lightning</td>
+                <td class="col-weapon-details-stats">@Model.Dark</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
