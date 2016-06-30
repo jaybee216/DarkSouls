@@ -12,5 +12,11 @@
         public double FireAR { get; set; }
         public double LightningAR { get; set; }
         public double DarkAR { get; set; }
+
+        public bool RequirementsMet { get; set; }
+        public int StrReq { get; set; }
+        public int DexReq { get; set; }
+        public int IntReq { get; set; }
+        public int FthReq { get; set; }
     }
 }

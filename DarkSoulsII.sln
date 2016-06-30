@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{84BD1092-3C8F-45AB-A862-EBD10BEEA471}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DarkSoulsDb", "DarkSoulsDb\DarkSoulsDb.sqlproj", "{65C515D3-220B-44F7-8F9B-EA9B72C1A8E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,12 @@ Global
 		{84BD1092-3C8F-45AB-A862-EBD10BEEA471}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84BD1092-3C8F-45AB-A862-EBD10BEEA471}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84BD1092-3C8F-45AB-A862-EBD10BEEA471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65C515D3-220B-44F7-8F9B-EA9B72C1A8E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65C515D3-220B-44F7-8F9B-EA9B72C1A8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65C515D3-220B-44F7-8F9B-EA9B72C1A8E2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{65C515D3-220B-44F7-8F9B-EA9B72C1A8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65C515D3-220B-44F7-8F9B-EA9B72C1A8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65C515D3-220B-44F7-8F9B-EA9B72C1A8E2}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

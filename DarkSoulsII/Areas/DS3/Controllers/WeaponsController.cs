@@ -109,6 +109,7 @@ namespace DarkSoulsII.Areas.DS3.Controllers
         public ActionResult CalculateAR(int weaponId, int infusionId, int upgradeLevel, int STR, int DEX, int INT, int FTH)
         {
             //TODO: Include Bleed/Poison/Frost
+            
             WeaponARModel model = _weaponsHelper.CalculateAR(weaponId, infusionId, upgradeLevel, STR, DEX, INT, FTH);
             return PartialView("_ARValues", model);
         }

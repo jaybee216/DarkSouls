@@ -130,10 +130,10 @@
                     <div class="col-sm-5">@Html.DropDownList("startingClassId", ViewBag.StartingClasses as IEnumerable<SelectListItem>, new { onchange = "startingClassChanged();", style = "width:100%;" })</div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-3"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength"/> @Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                    <div class="col-sm-3"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity"/> @Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                    <div class="col-sm-3"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence"/> @Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                    <div class="col-sm-3"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith"/> @Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-3"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-3"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-3"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-3"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
                 </div>
             </div>
             <div class="form-group row">
@@ -144,6 +144,4 @@
         </div>
     </div>
 </div>
-
-<h4>Results</h4>
 <div id="resultsDiv"></div>

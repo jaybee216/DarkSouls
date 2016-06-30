@@ -121,8 +121,26 @@ namespace DarkSoulsII.Areas.DS3.Helpers
             {
                 using (var unit = lifetime.Resolve<IUnitOfWork>())
                 {
-                    SqlParameter[] parameters = new SqlParameter[]
-                      {
+                    WeaponARModel result;
+
+                    Weapon weapon = unit.GetRepository<Weapon>().GetById(weaponId);
+
+                    if (weapon.StrReq > STR || weapon.DexReq > DEX || weapon.IntReq > INT || weapon.FthReq > FTH)
+                    {
+                        result = new WeaponARModel()
+                        {
+                            RequirementsMet = false,
+                            StrReq = weapon.StrReq,
+                            DexReq = weapon.DexReq,
+                            IntReq = weapon.IntReq,
+                            FthReq = weapon.FthReq
+                        };
+                    }
+                    else
+                    {
+                        
+                        SqlParameter[] parameters = new SqlParameter[]
+                          {
                             new SqlParameter("@WeaponId", weaponId),
                             new SqlParameter("@InfusionId", infusionId),
                             new SqlParameter("@ReinforcementLevel", upgradeLevel),
@@ -130,12 +148,12 @@ namespace DarkSoulsII.Areas.DS3.Helpers
                             new SqlParameter("@DEX", DEX),
                             new SqlParameter("@INT", INT),
                             new SqlParameter("@FTH", FTH)
-                      };
+                          };
 
-                    string query = "Exec [DS3].[CalculateWeaponAR] @WeaponId, @InfusionId, @ReinforcementLevel, @STR, @DEX, @INT, @FTH";
-
-                    WeaponARModel result = unit.SqlQuery<WeaponARModel>(query, parameters).FirstOrDefault();
-
+                        string query = "Exec [DS3].[CalculateWeaponAR] @WeaponId, @InfusionId, @ReinforcementLevel, @STR, @DEX, @INT, @FTH";
+                        result = unit.SqlQuery<WeaponARModel>(query, parameters).FirstOrDefault();
+                        result.RequirementsMet = true;
+                    }
                     return result;
                 }
             }
