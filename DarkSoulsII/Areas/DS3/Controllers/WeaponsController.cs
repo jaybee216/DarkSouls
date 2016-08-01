@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using DarkSoulsII.Infrastructure;
-using Model;
-using DataAccess;
 using Model.DS3;
 using DarkSoulsII.Areas.DS3.ViewModels;
 using DarkSoulsII.Areas.DS3.Helpers;
-//using Autofac;
-using System.Data.SqlClient;
-using System.Data.SqlTypes;
 
 namespace DarkSoulsII.Areas.DS3.Controllers
 {
@@ -22,39 +14,8 @@ namespace DarkSoulsII.Areas.DS3.Controllers
 
         // GET: DS3/Weapons
         public ActionResult Index(string searchValue = "", int weaponTypeId = 0, int infusionId = 1, int upgradeLevel = 10, 
-                                  double? weight = null, int? STR = null, int? DEX = null, int? INT = null, int? FTH = null)
+                                  double? weight = null, int? STR = null, int? DEX = null, int? INT = null, int? FTH = null, int? LCK = null)
         {
-            //if (searchValue != null)
-            //{
-            //    Session["DS3_Weapon_Search"] = searchValue;
-            //}
-
-            //Session["DS3_Weapon_WeaponTypeId"] = weaponTypeId;
-
-            //Session["DS3_Weapon_InfusionId"] = infusionId;
-
-            //Session["DS3_Weapon_Weight"] = weight;
-
-            //if (searchValue == null && Session["DS3_Weapon_Search"] != null)
-            //{
-            //    searchValue = Session["DS3_Weapon_Search"].ToString();
-            //}
-
-            //if (Session["DS3_Weapon_WeaponTypeId"] != null)
-            //{
-            //    weaponTypeId = (int)Session["DS3_Weapon_WeaponTypeId"];
-            //}
-
-            //if (Session["DS3_Weapon_InfusionId"] != null)
-            //{
-            //    infusionId = (int)Session["DS3_Weapon_InfusionId"];
-            //}
-
-            //if (Session["DS3_Weapon_Weight"] != null)
-            //{
-            //    weight = (double)Session["DS3_Weapon_Weight"];
-            //}
-
             searchValue = (searchValue == null) ? "" : searchValue.Trim();
 
             //TODO: Include Bleed/Poison/Frost
@@ -63,6 +24,7 @@ namespace DarkSoulsII.Areas.DS3.Controllers
 
             ViewBag.WeaponTypes = _weaponsHelper.GetWeaponTypes(weaponTypeId);
             ViewBag.ReinforcementLevels = _statsHelper.GetReinforcementLevels(upgradeLevel);
+            ViewBag.InfusionTypes = _weaponsHelper.GetInfusionTypes(infusionId);
             ViewBag.WeaponTypeId = weaponTypeId;
             ViewBag.SearchValue = searchValue;
             ViewBag.Weight = weight;
@@ -70,6 +32,7 @@ namespace DarkSoulsII.Areas.DS3.Controllers
             ViewBag.DEX = DEX;
             ViewBag.INT = INT;
             ViewBag.FTH = FTH;
+            ViewBag.LCK = LCK;
 
             return View();
         }
@@ -79,7 +42,6 @@ namespace DarkSoulsII.Areas.DS3.Controllers
         {
             //TODO: Include Bleed/Poison/Frost
             IEnumerable<WeaponViewModel> weapons = _weaponsHelper.WeaponSearch(weaponId: weaponId, upgradeLevel: upgradeLevel);
-
             WeaponDetailsView model = new WeaponDetailsView();
             model.Normal = weapons.Single(w => w.Infusion == "Normal");
             model.Infusions = weapons.Where(w => w.Infusion != "Normal").OrderBy(w => w.Infusion).ToList();
@@ -106,12 +68,23 @@ namespace DarkSoulsII.Areas.DS3.Controllers
         }
 
         [HttpPost]
-        public ActionResult CalculateAR(int weaponId, int infusionId, int upgradeLevel, int STR, int DEX, int INT, int FTH)
+        public ActionResult CalculateAR(int weaponId, int infusionId, int upgradeLevel, int STR, int DEX, int INT, int FTH, int LCK, bool twoHand)
         {
             //TODO: Include Bleed/Poison/Frost
-            
-            WeaponARModel model = _weaponsHelper.CalculateAR(weaponId, infusionId, upgradeLevel, STR, DEX, INT, FTH);
+            if (twoHand)
+            {
+                STR = (int)System.Math.Floor((double)STR * 1.5);
+            }
+            WeaponARModel model = _weaponsHelper.CalculateAR(weaponId, infusionId, upgradeLevel, STR, DEX, INT, FTH, LCK);
             return PartialView("_ARValues", model);
+        }
+
+        [HttpGet]
+        public JsonResult WeaponsAutocomplete(string term)
+        {
+            term = term.ToLower();
+            var weapons = _weaponsHelper.GetWeapons().Where(w => w.Text.ToLower().Contains(term));
+            return Json(weapons, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

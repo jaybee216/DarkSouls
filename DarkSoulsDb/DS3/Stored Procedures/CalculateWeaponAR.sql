@@ -1,65 +1,95 @@
-﻿-- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [DS3].[CalculateWeaponAR]
+﻿CREATE PROCEDURE [DS3].[CalculateWeaponAR]
 	@WeaponId int,
 	@InfusionId int = 1,
 	@ReinforcementLevel int = 10, 
 	@STR int = 0,
 	@DEX int = 0,
 	@INT int = 0,
-	@FTH int = 0
+	@FTH int = 0,
+	@LCK int = 0
 AS
 BEGIN
 SET NOCOUNT ON;
 
-Declare @BasePhys int = (Select [Physical] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
-Declare @BaseFire int = (Select [Fire] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
-Declare @BaseMagic int = (Select [Magic] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
-Declare @BaseLightning int = (Select [Lightning] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
-Declare @BaseDark int = (Select [Dark] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
+Declare @PhysicalSat int;
+Declare @MagicSat int;
+Declare @FireSat int;
+Declare @LightningSat int;
+Declare @DarkSat int;
+Declare @Physical float;
+Declare @Magic float;
+Declare @Fire float;
+Declare @Lightning float;
+Declare @Dark float;
+Declare @StrScaling float;
+Declare @DexScaling float;
+Declare @IntScaling float;
+Declare @FthScaling float;
+Declare @LckScaling float;
 
-Declare @WeaponStrScaling float = (Select [Str] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
-Declare @WeaponDexScaling float = (Select [Dex] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
-Declare @WeaponIntScaling float = (Select [Int] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
-Declare @WeaponFthScaling float = (Select [Fth] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
-Declare @WeaponLckScaling float = (Select [Lck] From [DS3].[WeaponValues] Where [WeaponId] = @WeaponId and InfusionId = @InfusionId);
+Select
+@PhysicalSat = PhysicalSat,
+@MagicSat = MagicSat,
+@FireSat = FireSat,
+@LightningSat = LightningSat,
+@DarkSat = DarkSat,
+@Physical = Physical,
+@Magic = Magic,
+@Fire = Fire,
+@Lightning = Lightning,
+@Dark = Dark,
+@StrScaling = Str,
+@DexScaling = Dex,
+@IntScaling = Int,
+@FthScaling = Faith,
+@LckScaling = Luck
+From DS3.WeaponValues Where WeaponId = @WeaponId and InfusionId = @InfusionId
 
-Declare @StrScaling float = (Select ISNULL([Scalar], 0) From [DS3].[StatScaling] Where [Value] = @STR)
-Declare @DexScaling float = (Select ISNULL([Scalar], 0) From [DS3].[StatScaling] Where [Value] = @DEX)
-Declare @IntScaling float = (Select ISNULL([Scalar], 0) From [DS3].[StatScaling] Where [Value] = @INT)
-Declare @FthScaling float = (Select ISNULL([Scalar], 0) From [DS3].[StatScaling] Where [Value] = @FTH)
+Declare @StrCoef float = (Select Value From DS3.SaturationValues Where SaturationId = @PhysicalSat and [Level] = @STR);
+Declare @DexCoef float = (Select Value From DS3.SaturationValues Where SaturationId = @PhysicalSat and [Level] = @DEX);
+Declare @LuckCoef float = (Select Value From DS3.SaturationValues Where SaturationId = @PhysicalSat and [Level] = @LCK);
 
-Declare @UpgradePathId int = (Select [UpgradePathId] From [DS3].[Weapon] Where [WeaponId] = @WeaponId);
+Declare @MagicCoef float = (Select Value From DS3.SaturationValues Where SaturationId = @MagicSat and [Level] = @INT);
 
-Declare @BaseModifier float = 
-CASE WHEN @UpgradePathId = 1 THEN
-	(Select [BaseModifier] From [DS3].[Reinforcement] Where [ReinforcementLevel] = @ReinforcementLevel)
-WHEN @UpgradePathId = 2 THEN
-	(Select [TwinklingBaseModifier] From [DS3].[Reinforcement] Where [ReinforcementLevel] = @ReinforcementLevel)
-WHEN @UpgradePathId = 3 THEN
-	(Select [ScaleBaseModifier] From [DS3].[Reinforcement] Where [ReinforcementLevel] = @ReinforcementLevel)
-WHEN @UpgradePathId is null THEN
-	1
+Declare @FireIntCoef float = (Select Value From DS3.SaturationValues Where SaturationId = @FireSat and [Level] = @INT);
+Declare @FireFthCoef float = (Select Value From DS3.SaturationValues Where SaturationId = @FireSat and [Level] = @FTH);
+
+Declare @LightningCoef float = (Select Value From DS3.SaturationValues Where SaturationId = @LightningSat and [Level] = @FTH);
+
+Declare @DarkIntCoef float = (Select Value From DS3.SaturationValues Where SaturationId = @DarkSat and [Level] = @INT);
+Declare @DarkFthCoef float = (Select Value From DS3.SaturationValues Where SaturationId = @DarkSat and [Level] = @FTH);
+
+Declare @TotalPhys float =  
+CASE 
+	WHEN 
+		@WeaponId IN (105, 24, 119, 66, 67) OR @InfusionId = 2 --Blessed Weapons, Anri’s Straight Sword, Saint Bident, Lothric’s Holy Sword, Wolnir’s Holy Blade, and Morne’s Great Hammer also receive physical damage from Faith scaling
+	THEN
+		@Physical + @Physical * (@StrScaling * @StrCoef + @DexScaling * @DexCoef + @LckScaling * @LuckCoef + @FthScaling * @LightningCoef)
+	WHEN
+		@WeaponId IN (150) --Golden Ritual Spear
+	THEN
+		@Physical + @Physical * (@StrScaling * @StrCoef + @DexScaling * @DexCoef + @LckScaling * @LuckCoef + @FthScaling * @LightningCoef)
+	ELSE 
+		@Physical + @Physical * (@StrScaling * @StrCoef + @DexScaling * @DexCoef + @LckScaling * @LuckCoef)
 END
 
-Declare @ScalingModifier float = (Select [ScalingModifier] From [DS3].[Reinforcement] Where [ReinforcementLevel] = @ReinforcementLevel)
+Declare @TotalMagic float = 
+CASE 
+	WHEN 
+		@WeaponId IN (150) --Golden Ritual Spear
+	THEN
+		@Magic + @Magic * (@FthScaling * @LightningCoef)
+	ELSE
+		@Magic + @Magic * (@IntScaling * @MagicCoef)
+END
 
-Declare @StrBonus float = (@BasePhys * @BaseModifier * @WeaponStrScaling * @ScalingModifier * @StrScaling) / 100;
-Declare @DexBonus float = (@BasePhys * @BaseModifier * @WeaponDexScaling * @ScalingModifier * @DexScaling) / 100;
+Declare @TotalFire float = @Fire + @Fire * (@IntScaling * @FireIntCoef + @FthScaling * @FireFthCoef)
 
-Declare @FireBonus float = (@BaseFire * @BaseModifier * @WeaponIntScaling * @WeaponFthScaling * @ScalingModifier * @IntScaling) / 100;
-Declare @MagicBonus float = (@BaseMagic * @BaseModifier * @WeaponIntScaling * @ScalingModifier * @IntScaling) / 100;
+Declare @TotalLightning float = @Lightning + @Lightning * (@FthScaling * @LightningCoef)
 
-Declare @PhysAR float = (@BasePhys * @BaseModifier) + @StrBonus + @DexBonus;
-Declare @FireAR float = (@BaseFire * @BaseModifier);-- + @FireIntBonus + @FireFthBonus;
-Declare @MagicAR float = (@BaseMagic * @BaseModifier);-- + @MagicIntBonus + @MagicFthBonus;
-Declare @LightningAR float = (@BaseLightning * @BaseModifier);-- + @IntBonus + @FthBonus;
-Declare @DarkAR float = (@BaseDark * @BaseModifier);-- + @IntBonus + @FthBonus;
+Declare @TotalDark float = @Dark + @Dark * (@IntScaling * @DarkIntCoef + @FthScaling * @DarkFthCoef)
 
-Declare @TotalAR float = @PhysAR + @FireAR + @MagicAR + @LightningAR + @DarkAR;
+Declare @UpgradePathId int = (Select [UpgradePathId] From [DS3].[Weapon] Where [WeaponId] = @WeaponId);
 
 Declare @WeaponName varchar(50) = CASE WHEN @InfusionId = 1 THEN 
 									'' 
@@ -81,28 +111,14 @@ Select
 @WeaponId as WeaponId,
 @ReinforcementLevel as ReinforcementLevel,
 @WeaponName as WeaponName,
-@TotalAR as TotalAR, 
-@StrScaling as StrScaling, 
-@DexScaling as DexScaling, 
-@BaseModifier as BaseModifier, 
-@ScalingModifier as ScalingModifier,
-@WeaponStrScaling * @ScalingModifier as WpnStrScaling,
-@WeaponDexScaling * @ScalingModifier as WpnDexScaling,
-@WeaponIntScaling * @ScalingModifier as WpnIntScaling,
-@WeaponFthScaling * @ScalingModifier as WpnFthScaling,
---@StrBonus as StrBonus, 
---@DexBonus as DexBonus, 
---@MagicBonus as MagicBonus, 
---@FireBonus as FireBonus, 
-@BasePhys * @BaseModifier as BasePhys,
-@BaseMagic * @BaseModifier as BaseMagic,
-@BaseFire * @BaseModifier as BaseFire,
-@BaseLightning * @BaseModifier as BaseLightning,
-@BaseDark * @BaseModifier as BaseDark,
-@PhysAR as PhysAR, 
-@FireAR as FireAR, 
-@MagicAR as MagicAR, 
-@LightningAR as LightningAR, 
-@DarkAR as DarkAR;
+@TotalPhys as PhysAR, 
+@TotalMagic as MagicAR, 
+@TotalFire as FireAR, 
+@TotalLightning as LightningAR, 
+@TotalDark as DarkAR,
+--@StrCoef as StrCoef, @DexCoef as DexCoef, @LuckCoef as LckCoef, 
+--@MagicCoef as MagicCoef, @FireIntCoef as FireIntCoef, @FireFthCoef as FireFthCoef,
+--@LightningCoef as LightningCoef, @DarkIntCoef as DarkIntCoef, @DarkFthCoef as DarkFthCoef,
+@TotalPhys + @TotalMagic + @TotalFire + @TotalLightning + @TotalDark as TotalAR
 
 END

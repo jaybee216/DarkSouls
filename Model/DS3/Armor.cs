@@ -10,7 +10,7 @@ namespace Model.DS3
         public string Name { get; set; }
         public int ArmorTypeId { get; set; }
         public decimal Weight { get; set; }
-        public decimal Durability { get; set; }
+        public int Durability { get; set; }
         public decimal Poise { get; set; }
         public double Poison { get; set; }
         public double Toxic { get; set; }

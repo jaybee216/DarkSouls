@@ -39,7 +39,7 @@ namespace DataAccess
         #region DS3
         public DbSet<DS3.Weapon> Ds3Weapons { get; set; }
         public DbSet<DS3.WeaponType> Ds3WeaponTypes { get; set; }
-        public DbSet<DS3.WeaponValues> Ds3WeaponValues { get; set; }
+        //public DbSet<DS3.WeaponValues> Ds3WeaponValues { get; set; }
         public DbSet<DS3.InfusionType> InfusionTypes { get; set; }
         public DbSet<DS3.StartingClass> StartingClasses { get; set; }
         #endregion
@@ -61,7 +61,7 @@ namespace DataAccess
 
             modelBuilder.Entity<DS3.Weapon>().ToTable("Weapon", "DS3");
             modelBuilder.Entity<DS3.WeaponType>().ToTable("WeaponType", "DS3");
-            modelBuilder.Entity<DS3.WeaponValues>().ToTable("WeaponValues", "DS3");
+            //modelBuilder.Entity<DS3.WeaponValues>().ToTable("WeaponValues", "DS3");
             modelBuilder.Entity<DS3.Armor>().ToTable("Armor", "DS3");
             modelBuilder.Entity<DS3.ArmorType>().ToTable("ArmorType", "DS3");
             modelBuilder.Entity<DS3.InfusionType>().ToTable("Infusion", "DS3");

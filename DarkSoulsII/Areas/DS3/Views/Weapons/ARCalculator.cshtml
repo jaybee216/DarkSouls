@@ -64,6 +64,7 @@
                 $('#dex').val(response.Dexterity);
                 $('#int').val(response.Intelligence);
                 $('#fth').val(response.Faith);
+                $('#lck').val(response.Luck);
             },
             complete: function () {
 
@@ -75,11 +76,14 @@
         var data = {
             weaponId: $('#weaponId').val(),
             infusionId: $('#infusionId').val(),
-            upgradeLevel: $('#upgradeLevel').val(),
+            //upgradeLevel: $('#upgradeLevel').val(),
+            upgradeLevel: 10,
             STR: $('#str').val(),
             DEX: $('#dex').val(),
             INT: $('#int').val(),
-            FTH: $('#fth').val()
+            FTH: $('#fth').val(),
+            LCK: $('#lck').val(),
+            twoHand: $('#twoHand').prop("checked")
         };
         $.ajax({
             url: 'CalculateAR',
@@ -98,47 +102,49 @@
 <h4>Weapon AR Calculator</h4>
 
 <div class="row">
-    <div class="col-sm-6">
-        <div class="panel panel-default" style="height:220px;">
+    <div class="col-sm-5">
+        <div class="panel panel-default">
             <div class="panel-heading">Weapon</div>
             <div class="panel-body">
                 <div class="form-group row">
                     <label class="col-sm-3">Type:</label>
-                    <div class="col-sm-5">@Html.DropDownList("weaponTypeId", ViewBag.WeaponTypes as IEnumerable<SelectListItem>, new { onchange = "weaponTypeChanged()", style = "width:100%;" })</div>
+                    <div class="col-sm-9">@Html.DropDownList("weaponTypeId", ViewBag.WeaponTypes as IEnumerable<SelectListItem>, new { onchange = "weaponTypeChanged()", style = "width:100%;" })</div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-3">Weapon:</label>
-                    <div class="col-sm-5">@Html.DropDownList("weaponId", ViewBag.Weapons as IEnumerable<SelectListItem>, new { onchange = "weaponChanged()", style = "width:100%;" })</div>
+                    <div class="col-sm-9">@Html.DropDownList("weaponId", ViewBag.Weapons as IEnumerable<SelectListItem>, new { onchange = "weaponChanged()", style = "width:100%;" })</div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-3">Infusion:</label>
-                    <div class="col-sm-5">@Html.DropDownList("infusionId", ViewBag.InfusionTypes as IEnumerable<SelectListItem>, new { style = "width:100%;" })</div>
+                    <div class="col-sm-9">@Html.DropDownList("infusionId", ViewBag.InfusionTypes as IEnumerable<SelectListItem>, new { style = "width:100%;" })</div>
                 </div>
-                <div class="form-group row">
+                @*<div class="form-group row">
                     <label class="col-sm-3">Upgrade Level:</label>
-                    <div class="col-sm-5">@Html.DropDownList("upgradeLevel", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>, new { onchange = "searchChanged();", style = "width:100%;" })</div>
-                </div>
+                    <div class="col-sm-9">@Html.DropDownList("upgradeLevel", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>, new { disabled = "true", onchange = "searchChanged();", style = "width:100%;" })</div>
+                </div>*@
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="panel panel-default" style="height:220px">
+    <div class="col-sm-7">
+        <div class="panel panel-default">
             <div class="panel-heading">Character Stats</div>
             <div class="panel-body">
                 <div class="form-group row">
                     <label class="col-sm-3">Starting Class:</label>
-                    <div class="col-sm-5">@Html.DropDownList("startingClassId", ViewBag.StartingClasses as IEnumerable<SelectListItem>, new { onchange = "startingClassChanged();", style = "width:100%;" })</div>
+                    <div class="col-sm-3">@Html.DropDownList("startingClassId", ViewBag.StartingClasses as IEnumerable<SelectListItem>, new { onchange = "startingClassChanged();", style = "width:100%;" })</div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-3"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                    <div class="col-sm-3"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                    <div class="col-sm-3"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                    <div class="col-sm-3"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-2"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-2"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-2"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-2"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-2"><img src="~/Content/Images/LCK.png" data-toggle="tooltip" title="Luck" /> @Html.TextBox("lck", ViewBag.LCK as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-offset-8 col-sm-3">
-                    <button type="submit" class="btn btn-secondary" onclick="calculate()" style="width:100%;">Calculate</button>
+                <div class="form-group row">
+                    <label class="col-sm-4"><input type="checkbox" id="twoHand" />&nbsp;&nbsp;Two-Hand Weapon</label>
+                    <div class="col-sm-offset-8 col-sm-3">
+                        <button type="submit" class="btn btn-secondary" onclick="calculate()" style="width:100%;">Calculate</button>
+                    </div>
                 </div>
             </div>
         </div>

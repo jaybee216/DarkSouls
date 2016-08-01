@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using DarkSoulsII.Infrastructure;
-using Model;
-using DataAccess;
-using Model.DS3;
 using DarkSoulsII.Areas.DS3.ViewModels;
 using DarkSoulsII.Areas.DS3.Helpers;
-//using Autofac;
-using System.Data.SqlClient;
-using System.Data.SqlTypes;
+
 namespace DarkSoulsII.Areas.DS3.Controllers
 {
     public class ArmorController : Controller
@@ -41,6 +33,14 @@ namespace DarkSoulsII.Areas.DS3.Controllers
         {
             ArmorViewModel armor = _armorHelper.ArmorSearch(armorId: armorId).Single();
             return View(armor);
+        }
+
+        [HttpGet]
+        public JsonResult ArmorAutocomplete(string term)
+        {
+            term = term.ToLower();
+            var armor = _armorHelper.GetArmor().Where(w => w.Text.ToLower().Contains(term));
+            return Json(armor, JsonRequestBehavior.AllowGet);
         }
     }
 }

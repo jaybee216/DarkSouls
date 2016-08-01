@@ -76,6 +76,7 @@
     <Build Include="DS3\Tables\WeaponType.sql" />
     <Build Include="DS3\Tables\WeaponValues.sql" />
     <Build Include="DS3\Tables\Infusion.sql" />
+    <Build Include="DS3\Tables\SaturationValues.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="DS3\Stored Procedures\WeaponSearch.sql" />

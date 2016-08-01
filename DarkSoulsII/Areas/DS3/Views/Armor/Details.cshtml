@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = Model.Name;
     string normalizedName = Model.Name.Replace(" ", "-").Replace("'", "");
-    string imageLink = String.Format("http://darksouls3.wdfiles.com/local--files/{0}/{1}.png", 
+    string imageLink = String.Format("http://darksouls3.wdfiles.com/local--files/{0}/{1}.png",
                                         normalizedName.ToLower(),
                                         Model.Name);
 }
@@ -27,12 +27,14 @@
         <div class="panel panel-default">
             <div class="panel-heading">Details</div>
             <div class="panel-body">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
+                    <label>Poise:</label> @Model.Poise
                 </div>
-                <div class="col-sm-6">
-                    <div class="row">
-                        <label>Weight:</label> @Model.Weight
-                    </div>
+                <div class="col-sm-4">
+                    <label>Weight:</label> @Model.Weight
+                </div>
+                <div class="col-sm-4">
+                    <label>Durability:</label> @Model.Durability
                 </div>
             </div>
         </div>
@@ -47,25 +49,41 @@
         <thead>
             <tr>
                 <td colspan="1"></td>
-                <td colspan="5" style="text-align:center;"><label>Defenses</label></td>
+                <td colspan="4" style="text-align:center;"><label>Physical Defenses</label></td>
+                <td colspan="4" style="text-align:center;"><label>Elemental Defenses</label></td>
+                <td colspan="4" style="text-align:center;"><label>Resistances</label></td>
             </tr>
             <tr>
                 <td><label>Name</label></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Phys.png" data-toggle="tooltip" title="Physical" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Magic.png" data-toggle="tooltip" title="Magic" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Fire.png" data-toggle="tooltip" title="Fire" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Lightning.png" data-toggle="tooltip" title="Lightning" /></td>
-                <td class="col-weapon-details-stats"><img src="~/Content/Images/Dark.png" data-toggle="tooltip" title="Dark" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/PhysDef.png" data-toggle="tooltip" title="Physical" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/SlashDef.png" data-toggle="tooltip" title="Slash" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/StrikeDef.png" data-toggle="tooltip" title="Strike" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/ThrustDef.png" data-toggle="tooltip" title="Thrust" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/MagicDef.png" data-toggle="tooltip" title="Magic" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/FireDef.png" data-toggle="tooltip" title="Fire" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/LightningDef.png" data-toggle="tooltip" title="Lightning" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/DarkDef.png" data-toggle="tooltip" title="Dark" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/BleedRes.png" data-toggle="tooltip" title="Bleed" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/CurseRes.png" data-toggle="tooltip" title="Curse" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/FrostRes.png" data-toggle="tooltip" title="Frost" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/PoisonRes.png" data-toggle="tooltip" title="Poison" /></td>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>@Model.Name</td>
-                <td class="col-weapon-details-stats">@Model.Physical</td>
-                <td class="col-weapon-details-stats">@Model.Magic</td>
-                <td class="col-weapon-details-stats">@Model.Fire</td>
-                <td class="col-weapon-details-stats">@Model.Lightning</td>
-                <td class="col-weapon-details-stats">@Model.Dark</td>
+                <td class="col-armor-details-stats">@Model.Physical</td>
+                <td class="col-armor-details-stats">@Model.Slash</td>
+                <td class="col-armor-details-stats">@Model.Strike</td>
+                <td class="col-armor-details-stats">@Model.Thrust</td>
+                <td class="col-armor-details-stats">@Model.Magic</td>
+                <td class="col-armor-details-stats">@Model.Fire</td>
+                <td class="col-armor-details-stats">@Model.Lightning</td>
+                <td class="col-armor-details-stats">@Model.Dark</td>
+                <td class="col-armor-details-stats">@Model.Blood</td>
+                <td class="col-armor-details-stats">@Model.Curse</td>
+                <td class="col-armor-details-stats">@Model.Frost</td>
+                <td class="col-armor-details-stats">@Model.Poison</td>
             </tr>
         </tbody>
     </table>

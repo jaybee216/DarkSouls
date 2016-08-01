@@ -1,15 +1,26 @@
 ﻿@{
-    ViewBag.Title = "Dark Souls Character Planner and Equipment Encyclopedia";
+    ViewBag.Title = "Dark Souls Search Utility and AR Calculator";
 }
 
 <div class="jumbotron">
     <h1>Dark Souls</h1>
-    <p>Character Planner and Equipment Encyclopedia</p>
+    <p>Search Utility and AR Calculator</p>
 </div>
 
-@*<div class="row">
-    <ul>
-        <li>@Html.ActionLink("Weapons", "Weapons", "Equipment")</li>
-        <li>@Html.ActionLink("AR Calculator", "ARCalculator", "Equipment")</li>
-    </ul>
-</div>*@
+<div class="row">
+    <div class="col-sm-4">
+        <h4>Dark Souls III</h4>
+        <ul>
+            <li>@Html.ActionLink("AR Calculator", "ARCalculator", "Weapons", new { area = "DS3" }, null)</li>
+            <li>@Html.ActionLink("Weapon Search", "Index", "Weapons", new { area = "DS3" }, null)</li>
+            <li>@Html.ActionLink("Armor Search", "Index", "Armor", new { area = "DS3" }, null)</li>
+        </ul>
+    </div>
+    <div class="col-sm-4">
+        <h4>Dark Souls II</h4>
+        <ul>
+            <li>@Html.ActionLink("AR Calculator", "ARCalculator", "Equipment", new { area = "" }, new { })</li>
+            <li>@Html.ActionLink("Weapon Search", "Weapons", "Equipment", new { area = "" }, new { })</li>
+        </ul>
+    </div>
+</div>

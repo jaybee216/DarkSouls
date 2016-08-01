@@ -29,7 +29,7 @@
         public double LckScaling { get; set; }
         public int UpgradeLevel { get; set; }
         public decimal Weight { get; set; }
-        public int Critical { get; set; }
+        public int? Critical { get; set; }
         public string UpgradePath { get; set; }
     }
 }

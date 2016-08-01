@@ -115,7 +115,7 @@ namespace DarkSoulsII.Areas.DS3.Helpers
             return weaponSelectList;
         }
 
-        public WeaponARModel CalculateAR(int weaponId, int infusionId, int upgradeLevel, int STR, int DEX, int INT, int FTH)
+        public WeaponARModel CalculateAR(int weaponId, int infusionId, int upgradeLevel, int STR, int DEX, int INT, int FTH, int LCK)
         {
             using (var lifetime = IoC.Container.BeginLifetimeScope())
             {
@@ -147,10 +147,11 @@ namespace DarkSoulsII.Areas.DS3.Helpers
                             new SqlParameter("@STR", STR),
                             new SqlParameter("@DEX", DEX),
                             new SqlParameter("@INT", INT),
-                            new SqlParameter("@FTH", FTH)
+                            new SqlParameter("@FTH", FTH),
+                            new SqlParameter("@LCK", LCK)
                           };
 
-                        string query = "Exec [DS3].[CalculateWeaponAR] @WeaponId, @InfusionId, @ReinforcementLevel, @STR, @DEX, @INT, @FTH";
+                        string query = "Exec [DS3].[CalculateWeaponAR] @WeaponId, @InfusionId, @ReinforcementLevel, @STR, @DEX, @INT, @FTH, @LCK";
                         result = unit.SqlQuery<WeaponARModel>(query, parameters).FirstOrDefault();
                         result.RequirementsMet = true;
                     }

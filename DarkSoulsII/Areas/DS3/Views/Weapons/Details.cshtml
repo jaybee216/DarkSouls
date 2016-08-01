@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = Model.Normal.Name;
     string normalizedName = Model.Normal.Name.Replace(" ", "-").Replace("'", "");
-    string imageLink = String.Format("http://darksouls3.wdfiles.com/local--files/image-set-equipment:{0}/{1}.png", 
+    string imageLink = String.Format("http://darksouls3.wdfiles.com/local--files/image-set-equipment:{0}/{1}.png",
                                         normalizedName.ToLower(),
                                         normalizedName);
 }
@@ -27,8 +27,14 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <h2>@Model.Normal.Name (+@(Model.Normal.UpgradePath == "Normal" ? Model.Normal.UpgradeLevel : Model.Normal.UpgradeLevel / 2))</h2>
-
+        @if (string.IsNullOrEmpty(Model.Normal.UpgradePath))
+        {
+            <h2>@Model.Normal.Name</h2>
+        }
+        else
+        {
+            <h2>@Model.Normal.Name (+@(Model.Normal.UpgradePath == "Normal" ? Model.Normal.UpgradeLevel : Model.Normal.UpgradeLevel / 2))</h2>
+        }
         <div class="panel panel-default">
             <div class="panel-heading">Details</div>
             <div class="panel-body">
@@ -47,12 +53,18 @@
                     <div class="row">
                         <label>Weight:</label> @Model.Normal.Weight
                     </div>
-                    <div class="row">
-                        <label>Critical:</label> @Model.Normal.Critical
-                    </div>
-                    <div class="row">
-                        <label>Upgrade Path:</label> @Model.Normal.UpgradePath
-                    </div>
+                    @if (Model.Normal.Critical != null)
+                    {
+                        <div class="row">
+                            <label>Critical:</label> @Model.Normal.Critical
+                        </div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.Normal.UpgradePath))
+                    {
+                        <div class="row">
+                            <label>Upgrade Path:</label> @Model.Normal.UpgradePath
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -62,7 +74,7 @@
     </div>
 </div>
 
-@Html.ActionLink("Calculate my Character's AR with this Weapon", "ARCalculator", new { weaponId = Model.Normal.WeaponId }, new { style = "font-weight: bold;" } )
+@Html.ActionLink("Calculate my Character's AR with this Weapon", "ARCalculator", new { weaponId = Model.Normal.WeaponId }, new { style = "font-weight: bold;" })
 
 <h3>Weapon Stats:</h3>
 <div class="table-responsive">
@@ -71,7 +83,7 @@
             <tr>
                 <td colspan="1"></td>
                 <td colspan="5" style="text-align:center;"><label>Base Damage</label></td>
-                <td colspan="4" style="text-align:center;"><label>Scaling</label></td>
+                <td colspan="5" style="text-align:center;"><label>Scaling</label></td>
             </tr>
             <tr>
                 <td><label>Name</label></td>
@@ -84,7 +96,7 @@
                 <td class="col-weapon-details-stats"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /></td>
                 <td class="col-weapon-details-stats"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /></td>
                 <td class="col-weapon-details-stats"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /></td>
-                @*<td><img src="~/Content/Images/LCK.png" /></td>*@
+                <td class="col-weapon-details-stats"><img src="~/Content/Images/LCK.png" data-toggle="tooltip" title="Luck" /></td>
             </tr>
         </thead>
         <tbody>
@@ -99,7 +111,7 @@
                 <td class="col-weapon-details-stats">@Model.Normal.DexScaling%</td>
                 <td class="col-weapon-details-stats">@Model.Normal.IntScaling%</td>
                 <td class="col-weapon-details-stats">@Model.Normal.FthScaling%</td>
-                @*<td>@Model.Normal.LckScaling%</td>*@
+                <td class="col-weapon-details-stats">@Model.Normal.LckScaling%</td>
             </tr>
         </tbody>
     </table>
@@ -120,7 +132,7 @@ else
                 <tr>
                     <td colspan="1"></td>
                     <td colspan="5" style="text-align:center;"><label>Base Damage</label></td>
-                    <td colspan="4" style="text-align:center;"><label>Scaling</label></td>
+                    <td colspan="5" style="text-align:center;"><label>Scaling</label></td>
                 </tr>
                 <tr>
                     <td><label>Infusion</label></td>
@@ -133,7 +145,7 @@ else
                     <td class="col-weapon-details-stats"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /></td>
                     <td class="col-weapon-details-stats"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /></td>
                     <td class="col-weapon-details-stats"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /></td>
-                    @*<td><img src="~/Content/Images/LCK.png" /></td>*@
+                    <td class="col-weapon-details-stats"><img src="~/Content/Images/LCK.png" data-toggle="tooltip" title="Luck" /></td>
                 </tr>
             </thead>
             <tbody>
@@ -150,7 +162,7 @@ else
                         <td class="col-weapon-details-stats">@w.DexScaling%</td>
                         <td class="col-weapon-details-stats">@w.IntScaling%</td>
                         <td class="col-weapon-details-stats">@w.FthScaling%</td>
-                        @*<td>@w.LckScaling%</td>*@
+                        <td class="col-weapon-details-stats">@w.LckScaling%</td>
                     </tr>
                 }
             </tbody>

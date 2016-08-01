@@ -19,7 +19,7 @@
     <br />
     <div class="row">
         <div class="col-sm-4">
-            <div class="panel panel-default" style="height:100px;">
+            <div class="panel panel-default">
                 <div class="panel-heading">Requirements</div>
                 <div class="panel-body">
                     <div class="col-sm-3"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Model.StrReq</div>
@@ -39,23 +39,23 @@ else
             <thead>
                 <tr>
                     <td colspan="1"><label></label></td>
-                    <td colspan="1"><label>Total AR</label></td>
-                    <td colspan="1"><label>Physical</label></td>
-                    <td colspan="1"><label>Magic</label></td>
-                    <td colspan="1"><label>Fire</label></td>
-                    <td colspan="1"><label>Lightning</label></td>
-                    <td colspan="1"><label>Dark</label></td>
+                    <td colspan="1" class="col-weapon-ar-stats"><label>Total AR</label></td>
+                    <td colspan="1" class="col-weapon-ar-stats"><label>Physical</label></td>
+                    <td colspan="1" class="col-weapon-ar-stats"><label>Magic</label></td>
+                    <td colspan="1" class="col-weapon-ar-stats"><label>Fire</label></td>
+                    <td colspan="1" class="col-weapon-ar-stats"><label>Lightning</label></td>
+                    <td colspan="1" class="col-weapon-ar-stats"><label>Dark</label></td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>@Html.ActionLink(Model.WeaponName, "Details", new { weaponId = Model.WeaponId, upgradeLevel = Model.ReinforcementLevel })</td>
-                    <td>@Model.TotalAR.ToString("F")</td>
-                    <td>@Model.PhysAR.ToString("F")</td>
-                    <td>@Model.MagicAR.ToString("F")</td>
-                    <td>@Model.FireAR.ToString("F")</td>
-                    <td>@Model.LightningAR.ToString("F")</td>
-                    <td>@Model.DarkAR.ToString("F")</td>
+                    <td class="col-weapon-ar-stats">@Model.TotalAR.ToString("F")</td>
+                    <td class="col-weapon-ar-stats">@Model.PhysAR.ToString("F")</td>
+                    <td class="col-weapon-ar-stats">@Model.MagicAR.ToString("F")</td>
+                    <td class="col-weapon-ar-stats">@Model.FireAR.ToString("F")</td>
+                    <td class="col-weapon-ar-stats">@Model.LightningAR.ToString("F")</td>
+                    <td class="col-weapon-ar-stats">@Model.DarkAR.ToString("F")</td>
                 </tr>
             </tbody>
         </table>

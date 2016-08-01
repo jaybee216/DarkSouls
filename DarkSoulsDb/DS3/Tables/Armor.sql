@@ -26,7 +26,7 @@
 
 GO
 
-ALTER TABLE [DS3].[Armor]  WITH CHECK ADD  CONSTRAINT [FK_Armor_ArmorType] FOREIGN KEY([ArmorTypeId])
+ALTER TABLE [DS3].[Armor] ADD CONSTRAINT [FK_Armor_ArmorType] FOREIGN KEY([ArmorTypeId])
 REFERENCES [DS3].[ArmorType] ([ArmorTypeId])
 GO
 

@@ -251,4 +251,5 @@ paket-files/
 .idea/
 *.sln.iml
 /DarkSoulsII/PrivateSettings.config
+/DarkSoulsII/ConnectionStrings.config
 /DarkSoulsIII

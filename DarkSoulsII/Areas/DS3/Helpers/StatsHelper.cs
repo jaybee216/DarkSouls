@@ -1,36 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using DataAccess;
 using DarkSoulsII.Infrastructure;
-using Autofac;
-using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using Model.DS3;
-using DarkSoulsII.Areas.DS3.ViewModels;
 namespace DarkSoulsII.Areas.DS3.Helpers
 {
     public class StatsHelper
     {
         private readonly ICache _cache = IoC.Resolve<ICache>();
-
-        //public IEnumerable<SelectListItem> GetReinforcementLevels(int upgradeLevel = 0)
-        //{
-        //    return new List<SelectListItem>() {
-        //        new SelectListItem() { Text = "+0", Value = "0", Selected = upgradeLevel == 0 },
-        //        new SelectListItem() { Text = "+1 (+0 Twinkling/Scale)", Value = "1", Selected = upgradeLevel == 1 },
-        //        new SelectListItem() { Text = "+2 (+1 Twinkling/Scale)", Value = "2", Selected = upgradeLevel == 2 },
-        //        new SelectListItem() { Text = "+3 (+1 Twinkling/Scale)", Value = "3", Selected = upgradeLevel == 3 },
-        //        new SelectListItem() { Text = "+4 (+2 Twinkling/Scale)", Value = "4", Selected = upgradeLevel == 4 },
-        //        new SelectListItem() { Text = "+5 (+2 Twinkling/Scale)", Value = "5", Selected = upgradeLevel == 5 },
-        //        new SelectListItem() { Text = "+6 (+3 Twinkling/Scale)", Value = "6", Selected = upgradeLevel == 6 },
-        //        new SelectListItem() { Text = "+7 (+3 Twinkling/Scale)", Value = "7", Selected = upgradeLevel == 7 },
-        //        new SelectListItem() { Text = "+8 (+4 Twinkling/Scale)", Value = "8", Selected = upgradeLevel == 8 },
-        //        new SelectListItem() { Text = "+9 (+4 Twinkling/Scale)", Value = "9", Selected = upgradeLevel == 9 },
-        //        new SelectListItem() { Text = "+10 (+5 Twinkling/Scale)", Value = "10", Selected = upgradeLevel == 10 }
-        //    };
-        //}
 
         public IEnumerable<SelectListItem> GetReinforcementLevels(int upgradeLevel = 0)
         {

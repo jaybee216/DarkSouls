@@ -7,7 +7,7 @@
         
         public string Name { get; set; }
         public decimal Weight { get; set; }
-        public decimal Durability { get; set; }
+        public int Durability { get; set; }
         public decimal Poise { get; set; }
         public decimal PoiseToWeight { get; set; }
         public double DefenseToWeight { get; set; }

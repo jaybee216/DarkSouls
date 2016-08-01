@@ -18,9 +18,6 @@ AS
 BEGIN
 SET NOCOUNT ON;
 
-Declare @BaseModifier float = (Select [BaseModifier] From [DS3].[Reinforcement] Where [ReinforcementLevel] = @ReinforcementLevel)
-Declare @ScalingModifier float = (Select [ScalingModifier] From [DS3].[Reinforcement] Where [ReinforcementLevel] = @ReinforcementLevel)
-
 Select 
 w.WeaponId,
 wt.WeaponTypeId,
@@ -28,23 +25,23 @@ i.InfusionId,
 w.Name, 
 wt.Name as WeaponType,
 i.Name as Infusion,
-wv.Physical * @BaseModifier as Physical, 
-wv.Magic * @BaseModifier as Magic, 
-wv.Fire * @BaseModifier as Fire, 
-wv.Lightning * @BaseModifier as Lightning, 
-wv.Dark * @BaseModifier as Dark, 
-wv.Bleed,
-wv.Poison,
-wv.Frost,
+wv.Physical, 
+wv.Magic, 
+wv.Fire, 
+wv.Lightning, 
+wv.Dark, 
+--w.Bleed,
+--w.Poison,
+--w.Frost,
 w.StrReq, 
 w.DexReq, 
 w.IntReq, 
 w.FthReq, 
-wv.Str * @ScalingModifier as StrScaling, 
-wv.Dex * @ScalingModifier as DexScaling, 
-wv.Int * @ScalingModifier as IntScaling, 
-wv.Fth * @ScalingModifier as FthScaling, 
-wv.Lck * @ScalingModifier as LckScaling, 
+wv.Str * 100 as StrScaling, 
+wv.Dex * 100 as DexScaling, 
+wv.Int * 100 as IntScaling, 
+wv.Faith * 100 as FthScaling, 
+wv.Luck * 100 as LckScaling, 
 w.Weight,
 w.Critical,
 up.Type as UpgradePath

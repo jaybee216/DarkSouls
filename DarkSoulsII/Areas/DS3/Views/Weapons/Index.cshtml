@@ -9,32 +9,29 @@
     $(document).ready(function () {
         $('#weaponResultsTable').DataTable({
             "language": { "search": "Filter:" },
-            //"autoWidth": false,
-            //"columns": [
-            //    null,
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    { "width": "5%" },
-            //    null,
-            //    null
-            //]
         });
-    });
 
-    $('#searchValue').keypress(function (e) {
-        if (e.keyCode == 13) {
-            searchChanged();
-        }
+        $("#searchValue").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("WeaponsAutocomplete")',
+                    type: "GET",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Text, value: item.Text };
+                        }))
+                    }
+                })
+            }
+        });
+
+        $('#searchValue').keypress(function (e) {
+            if (e.keyCode == 13) {
+                searchChanged();
+            }
+        });
     });
 
     function searchChanged() {
@@ -48,7 +45,7 @@
 {
     <div class="row">
         <div class="col-sm-6">
-            <div class="panel panel-default" style="height:220px;">
+            <div class="panel panel-default">
                 <div class="panel-heading">Search Terms</div>
                 <div class="panel-body">
                     <div class="form-group row">
@@ -62,9 +59,9 @@
                         <div class="col-sm-8">@Html.TextBox("searchValue", ViewBag.SearchValue as string, new { style = "width:100%;" })</div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3">Upgrade Level:</label>
-                        <div class="col-sm-5">@Html.DropDownList("upgradeLevel", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>, new { onchange = "searchChanged();", style = "width:100%;" })</div>
-                        <div class="col-sm-offset-1 col-sm-3">
+                        @*<label class="col-sm-3">Upgrade Level:</label>
+                            <div class="col-sm-5">@Html.DropDownList("upgradeLevel", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>, new { onchange = "searchChanged();", style = "width:100%;" })</div>*@
+                        <div class="col-sm-offset-9 col-sm-3">
                             <button type="submit" class="btn btn-secondary" onclick="searchChanged();" style="width:100%;">Search</button>
                         </div>
                     </div>
@@ -72,7 +69,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="panel panel-default" style="height:220px">
+            <div class="panel panel-default">
                 <div class="panel-heading">Additional Filters</div>
                 <div class="panel-body">
                     <div class="form-group">
@@ -90,10 +87,10 @@
                         <label class="col-sm-3">Max Weight:</label>
                         <div class="col-sm-3">@Html.TextBox("weight", ViewBag.Weight as decimal?, new { type = "number", min = "0", style = "width:100%;" })</div>
                     </div>
-                    @*<div class="form-group row">
-                            <label class="col-sm-3">Upgrade Path:</label>
-                            <div class="col-sm-3">@Html.DropDownList("upgradePath", ViewBag.UpgradePaths as IEnumerable<SelectListItem>, new { onchange = "searchChanged();", style = "width:100%;" })</div>
-                        </div>*@
+                    <div class="form-group row">
+                        <label class="col-sm-3">Infusion:</label>
+                        <div class="col-sm-5">@Html.DropDownList("infusionId", ViewBag.InfusionTypes as IEnumerable<SelectListItem>, new { style = "width:100%;" })</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,7 +107,7 @@
                 <td colspan="1"></td>
                 <td colspan="5" style="text-align:center;"><label>Base Damage</label></td>
                 <td colspan="4" style="text-align:center;"><label>Requirements</label></td>
-                <td colspan="4" style="text-align:center;"><label>Scaling</label></td>
+                <td colspan="5" style="text-align:center;"><label>Scaling</label></td>
                 <td colspan="1"></td>
             </tr>
             <tr>
@@ -129,7 +126,7 @@
                 <td class="col-weapon-search-stats"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /></td>
                 <td class="col-weapon-search-stats"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /></td>
                 <td class="col-weapon-search-stats"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /></td>
-                @*<td  class="col-weapon-search-stats"><img src="~/Content/Images/LCK.png" /></td>*@
+                <td class="col-weapon-search-stats"><img src="~/Content/Images/LCK.png" data-toggle="tooltip" title="Luck" /></td>
                 <td class="col-weapon-search-stats"><img src="~/Content/Images/Weight.png" data-toggle="tooltip" title="Weight" /></td>
                 @*<td><label>Upgrade</label></td>*@
             </tr>
@@ -140,7 +137,7 @@
                 foreach (WeaponViewModel w in Model)
                 {
                     <tr>
-                        <td>@Html.ActionLink(w.Name, "Details", new { weaponId = w.WeaponId, upgradeLevel = w.UpgradeLevel })</td>
+                        <td style="font-size:12px;">@Html.ActionLink(w.Name, "Details", new { weaponId = w.WeaponId, upgradeLevel = w.UpgradeLevel })</td>
                         <td class="col-weapon-search-stats">@w.Physical</td>
                         <td class="col-weapon-search-stats">@w.Magic</td>
                         <td class="col-weapon-search-stats">@w.Fire</td>
@@ -154,7 +151,7 @@
                         <td class="col-weapon-search-stats">@w.DexScaling%</td>
                         <td class="col-weapon-search-stats">@w.IntScaling%</td>
                         <td class="col-weapon-search-stats">@w.FthScaling%</td>
-                        @*<td  class="col-weapon-search-stats">@w.LckScaling%</td>*@
+                        <td class="col-weapon-search-stats">@w.LckScaling%</td>
                         <td class="col-weapon-search-stats">@w.Weight</td>
                         @*<td>@w.UpgradePath</td>*@
                     </tr>
