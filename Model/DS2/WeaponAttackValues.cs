@@ -21,10 +21,6 @@ namespace Model.DS2
         public decimal? FireScaling { get; set; }
         public decimal? LightningScaling { get; set; }
         public decimal? DarkScaling { get; set; }
-        public int? StrReq { get; set; }
-        public int? DexReq { get; set; }
-        public int? FthReq { get; set; }
-        public int? IntReq { get; set; }
         public int? RoBBonus { get; set; }
         public int? FlynnBonus { get; set; }
 

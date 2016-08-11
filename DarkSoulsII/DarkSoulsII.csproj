@@ -367,7 +367,7 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Areas\DS3\Views\web.config" />
-    <Content Include="Areas\DS3\Views\Weapons\Index.cshtml" />
+    <Content Include="Views\Weapons\Index.cshtml" />
     <Content Include="Areas\DS3\Views\_ViewStart.cshtml" />
     <Content Include="Areas\DS3\Views\Weapons\Details.cshtml" />
     <Content Include="Areas\DS3\Views\Weapons\_ARValues.cshtml" />
@@ -383,6 +383,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\DS3\Views\Weapons\Index.cshtml" />
     <None Include="Properties\PublishProfiles\negator13.pubxml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -528,37 +529,44 @@
     <Compile Include="Areas\DS3\ViewModels\ArmorViewModel.cs" />
     <Compile Include="Areas\DS3\ViewModels\WeaponViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EquipmentController.cs" />
+    <Compile Include="Controllers\ArmorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Controllers\WeaponsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ArmorHelper.cs" />
+    <Compile Include="Helpers\StatsHelper.cs" />
+    <Compile Include="Helpers\WeaponsHelper.cs" />
     <Compile Include="Infrastructure\Cache.cs" />
     <Compile Include="Infrastructure\ICache.cs" />
     <Compile Include="Infrastructure\IoC.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\ArmorViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\Weapon.cs" />
-    <Compile Include="ViewModels\WeaponDetails.cs" />
+    <Compile Include="ViewModels\WeaponARModel.cs" />
+    <Compile Include="ViewModels\WeaponDetailsView.cs" />
+    <Compile Include="ViewModels\WeaponViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\MyCharacters.cshtml" />
-    <Content Include="Views\Equipment\Index.cshtml" />
-    <Content Include="Views\Equipment\Weapons.cshtml" />
-    <Content Include="Views\Equipment\ARCalculator.cshtml" />
-    <Content Include="Views\Equipment\WeaponDetails.cshtml" />
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
+    <Content Include="Views\Armor\Details.cshtml" />
+    <Content Include="Views\Armor\Index.cshtml" />
+    <Content Include="Views\Weapons\_ARValues.cshtml" />
+    <Content Include="Views\Weapons\ARCalculator.cshtml" />
+    <Content Include="Views\Weapons\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

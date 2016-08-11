@@ -30,6 +30,8 @@ namespace DataAccess
         }
 
         #region DS2
+        public DbSet<DS2.DS2Armor> Ds2Armors { get; set; }
+        public DbSet<DS2.DS2ArmorType> Ds2ArmorTypes { get; set; }
         public DbSet<DS2.DS2Weapon> Weapons { get; set; }
         public DbSet<DS2.WeaponCategory> WeaponCategories { get; set; }
         public DbSet<DS2.WeaponAttackValues> WeaponAttackValues { get; set; }
@@ -56,6 +58,8 @@ namespace DataAccess
             modelBuilder.Entity<ApplicationUserRole>().ToTable("UserRole");
             modelBuilder.Entity<ApplicationUserLogin>().ToTable("UserLogin");
 
+            modelBuilder.Entity<DS2.DS2Armor>().ToTable("Armor", "dbo");
+            modelBuilder.Entity<DS2.DS2ArmorType>().ToTable("ArmorType", "dbo");
             modelBuilder.Entity<DS2.DS2Weapon>().ToTable("Weapon", "dbo");
             modelBuilder.Entity<DS2.Infusion>().ToTable("Infusion", "dbo");
 

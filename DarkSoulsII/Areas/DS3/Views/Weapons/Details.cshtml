@@ -3,7 +3,7 @@
 @model WeaponDetailsView
 @{
     ViewBag.Title = Model.Normal.Name;
-    string normalizedName = Model.Normal.Name.Replace(" ", "-").Replace("'", "");
+    string normalizedName = Model.Normal.Name.Replace(" ", "-").Replace("'", "-");
     string imageLink = String.Format("http://darksouls3.wdfiles.com/local--files/image-set-equipment:{0}/{1}.png",
                                         normalizedName.ToLower(),
                                         normalizedName);
@@ -38,33 +38,35 @@
         <div class="panel panel-default">
             <div class="panel-heading">Details</div>
             <div class="panel-body">
-                <div class="col-sm-6">
-                    <div class="row">
-                        <label class="col-sm-6">Requirements:</label>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-1"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Model.Normal.StrReq</div>
-                        <div class="col-sm-1"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Model.Normal.DexReq</div>
-                        <div class="col-sm-1"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Model.Normal.IntReq</div>
-                        <div class="col-sm-1"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Model.Normal.FthReq</div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="row">
-                        <label>Weight:</label> @Model.Normal.Weight
-                    </div>
-                    @if (Model.Normal.Critical != null)
-                    {
+                <div class="row">
+                    <div class="col-sm-6">
                         <div class="row">
-                            <label>Critical:</label> @Model.Normal.Critical
+                            <label class="col-sm-6">Requirements:</label>
                         </div>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model.Normal.UpgradePath))
-                    {
                         <div class="row">
-                            <label>Upgrade Path:</label> @Model.Normal.UpgradePath
+                            <div class="col-sm-1"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Model.Normal.StrReq</div>
+                            <div class="col-sm-1"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Model.Normal.DexReq</div>
+                            <div class="col-sm-1"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Model.Normal.IntReq</div>
+                            <div class="col-sm-1"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Model.Normal.FthReq</div>
                         </div>
-                    }
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <label>Weight:</label> @Model.Normal.Weight
+                        </div>
+                        @if (Model.Normal.Critical != null)
+                        {
+                            <div class="row">
+                                <label>Critical:</label> @Model.Normal.Critical
+                            </div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.Normal.UpgradePath))
+                        {
+                            <div class="row">
+                                <label>Upgrade Path:</label> @Model.Normal.UpgradePath
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

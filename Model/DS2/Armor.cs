@@ -3,28 +3,34 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.DS2
 {
-    public class Armor
+    public class DS2Armor
     {
-        //[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //public int ArmorId { get; set; }
-        //public string Name { get; set; }
-        //public int PhysicalDEF { get; set; }
-        //public int PhysicalDEFStrike { get; set; }
-        //public int PhysicalDEFSlash { get; set; }
-        //public int PhysicalDEFThrust { get; set; }
-        //public int MagicDEF { get; set; }
-        //public int FireDEF { get; set; }
-        //public int LightningDEF { get; set; }
-        //public int DarkDEF { get; set; }
-        //public decimal Poise { get; set; }
-        //public int PoisonResist { get; set; }
-        //public int BleedResist { get; set; }
-        //public int PetrifyResist { get; set; }
-        //public int CurseResist { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ArmorId { get; set; }
+        public string Name { get; set; }
+        public int ArmorTypeId { get; set; }
+        public string Phys { get; set; }
+        public int? Physical { get; set; }
+        public int? Strike { get; set; }
+        public int? Slash { get; set; }
+        public int? Thrust { get; set; }
+        public int Magic { get; set; }
+        public int Fire { get; set; }
+        public int Lightning { get; set; }
+        public int Dark { get; set; }
+        public int Poise { get; set; }
+        public int Poison { get; set; }
+        public int Bleed { get; set; }
+        public int Petrification { get; set; }
+        public int Curse { get; set; }
+        public int Durability { get; set; }
+        public double Weight { get; set; }
         //public int StrengthRequirement { get; set; }
         //public int DexterityRequirement { get; set; }
         //public int IntelligenceRequirement { get; set; }
         //public int FaithRequirement { get; set; }
-        //public int PhysicalDEFBonus { get; set; }
+
+        [ForeignKey("ArmorTypeId")]
+        public DS2ArmorType ArmorType { get; set; }
     }
 }

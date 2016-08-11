@@ -13,6 +13,8 @@ namespace DarkSoulsII.Infrastructure
         void Insert(string key, object value, CacheDependency dependencies, DateTime absoluteExpiration, TimeSpan slidingExpiration);
         object Remove(string key);
 
+        IList<Model.DS2.DS2ArmorType> GetArmorTypes(Func<Model.DS2.DS2ArmorType, bool> filter = null, bool forceUpdate = false);
+        IList<Model.DS2.DS2Armor> GetArmor(Func<Model.DS2.DS2Armor, bool> filter = null, bool forceUpdate = false);
         IList<Model.DS2.WeaponCategory> GetWeaponCategories(Func<Model.DS2.WeaponCategory, bool> filter = null, bool forceUpdate = false);
         IList<Model.DS2.DS2Weapon> GetWeapons(Func<Model.DS2.DS2Weapon, bool> filter = null, bool forceUpdate = false);
         IList<Model.DS2.Infusion> GetInfusions(Func<Model.DS2.Infusion, bool> filter = null, bool forceUpdate = false);

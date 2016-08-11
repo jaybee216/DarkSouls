@@ -1,0 +1,149 @@
+﻿@using DarkSoulsII.Areas.DS3.ViewModels;
+
+@model List<WeaponViewModel>
+@{
+    ViewBag.Title = "Weapons";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#weaponResults').DataTable({
+            "language": { "search": "Filter:" }
+        });
+        //startingClassChanged();
+    });
+
+    function weaponTypeChanged() {
+        $.ajax({
+            url: 'Weapons',
+            type: 'GET',
+            data: { weaponTypeId: $('#weaponTypeId').val() },
+            success: function (response) {
+                var $select = $('#weaponId');
+                $select.empty();
+                $.each(response, function (i, sli) {
+                    $('<option>', {
+                        value: sli.Value
+                    }).html(sli.Text).appendTo($select);
+                });
+                weaponChanged();
+            },
+            complete: function () {
+
+            }
+        });
+    }
+
+    function weaponChanged() {
+        $.ajax({
+            url: 'Infusions',
+            type: 'GET',
+            data: { weaponId: $('#weaponId').val() },
+            success: function (response) {
+                var $select = $('#infusionId');
+                $select.empty();
+                $.each(response, function (i, sli) {
+                    $('<option>', {
+                        value: sli.Value
+                    }).html(sli.Text).appendTo($select);
+                });
+            },
+            complete: function () {
+
+            }
+        });
+    }
+
+    //function startingClassChanged() {
+    //    $.ajax({
+    //        url: 'ChangeStartingClass',
+    //        type: 'GET',
+    //        data: { startingClassId: $('#startingClassId').val() },
+    //        success: function (response) {
+    //            $('#str').val(response.Strength);
+    //            $('#dex').val(response.Dexterity);
+    //            $('#int').val(response.Intelligence);
+    //            $('#fth').val(response.Faith);
+    //            $('#lck').val(response.Luck);
+    //        },
+    //        complete: function () {
+
+    //        }
+    //    });
+    //}
+
+    function calculate() {
+        var data = {
+            weaponId: $('#weaponId').val(),
+            infusionId: $('#infusionId').val(),
+            STR: $('#str').val(),
+            DEX: $('#dex').val(),
+            INT: $('#int').val(),
+            FTH: $('#fth').val(),
+            //twoHand: $('#twoHand').prop("checked")
+        };
+        $.ajax({
+            url: 'CalculateAR',
+            type: 'POST',
+            data: data,
+            success: function (response) {
+                $('#resultsDiv').html(response);
+            },
+            complete: function () {
+
+            }
+        });
+    }
+</script>
+
+<h4>Weapon AR Calculator</h4>
+
+<div class="row">
+    <div class="col-sm-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">Weapon</div>
+            <div class="panel-body">
+                <div class="form-group row">
+                    <label class="col-sm-3">Type:</label>
+                    <div class="col-sm-9">@Html.DropDownList("weaponTypeId", ViewBag.WeaponTypes as IEnumerable<SelectListItem>, new { onchange = "weaponTypeChanged()", style = "width:100%;" })</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Weapon:</label>
+                    <div class="col-sm-9">@Html.DropDownList("weaponId", ViewBag.Weapons as IEnumerable<SelectListItem>, new { onchange = "weaponChanged()", style = "width:100%;" })</div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3">Infusion:</label>
+                    <div class="col-sm-9">@Html.DropDownList("infusionId", ViewBag.InfusionTypes as IEnumerable<SelectListItem>, new { style = "width:100%;" })</div>
+                </div>
+                @*<div class="form-group row">
+                    <label class="col-sm-3">Upgrade Level:</label>
+                    <div class="col-sm-9">@Html.DropDownList("upgradeLevel", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>, new { disabled = "true", onchange = "searchChanged();", style = "width:100%;" })</div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-7">
+        <div class="panel panel-default">
+            <div class="panel-heading">Character Stats</div>
+            <div class="panel-body">
+                @*<div class="form-group row">
+                    <label class="col-sm-3">Starting Class:</label>
+                    <div class="col-sm-3">@Html.DropDownList("startingClassId", ViewBag.StartingClasses as IEnumerable<SelectListItem>, new { onchange = "startingClassChanged();", style = "width:100%;" })</div>
+                </div>*@
+                <div class="form-group row">
+                    <div class="col-sm-2"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-2"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-2"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                    <div class="col-sm-2"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", style = "width:50px;" })</div> 
+                </div>
+                <div class="form-group row">
+                    @*<label class="col-sm-4"><input type="checkbox" id="twoHand" />&nbsp;&nbsp;Two-Hand Weapon</label>*@
+                    <div class="col-sm-offset-8 col-sm-3">
+                        <button type="submit" class="btn btn-secondary" onclick="calculate()" style="width:100%;">Calculate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="resultsDiv"></div>

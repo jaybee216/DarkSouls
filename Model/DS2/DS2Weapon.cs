@@ -16,6 +16,10 @@ namespace Model.DS2
         public decimal? Stability { get; set; }
         public int? Durability { get; set; }
         public decimal? Weight { get; set; }
+        public int StrReq { get; set; }
+        public int DexReq { get; set; }
+        public int FthReq { get; set; }
+        public int IntReq { get; set; }
         //public decimal PhysicalReduction { get; set; }
         //public decimal MagicReduction { get; set; }
         //public decimal FireReduction { get; set; }

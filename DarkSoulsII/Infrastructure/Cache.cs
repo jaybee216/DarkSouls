@@ -13,6 +13,8 @@ namespace DarkSoulsII.Infrastructure
 {
     public class Cache : ICache
     {
+        private const string ArmorTypesCacheKey = "Global_ArmorTypes";
+        private const string ArmorCacheKey = "Global_Armor";
         private const string WeaponCategoriesCacheKey = "Global_WeaponCategories";
         private const string WeaponsCacheKey = "Global_Weapons";
         private const string InfusionsCacheKey = "Global_Infusions";
@@ -69,6 +71,52 @@ namespace DarkSoulsII.Infrastructure
         public object Remove(string key)
         {
             return HttpRuntime.Cache.Remove(key);
+        }
+
+        public IList<DS2.DS2ArmorType> GetArmorTypes(Func<DS2.DS2ArmorType, bool> filter = null, bool forceUpdate = false)
+        {
+            var categories = Get(ArmorTypesCacheKey) as IList<DS2.DS2ArmorType>;
+            if (categories == null || forceUpdate)
+            {
+                using (var lifetime = IoC.Container.BeginLifetimeScope())
+                {
+                    using (var unit = lifetime.Resolve<IUnitOfWork>())
+                    {
+                        categories = unit.GetRepository<DS2.DS2ArmorType>().Get().ToList();
+                        Add(ArmorTypesCacheKey, categories, null, DateTime.Now.AddHours(6), System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+                    }
+                }
+            }
+
+            if (filter != null)
+            {
+                return categories.Where(filter).ToList();
+            }
+
+            return categories;
+        }
+
+        public IList<DS2.DS2Armor> GetArmor(Func<DS2.DS2Armor, bool> filter = null, bool forceUpdate = false)
+        {
+            var armors = Get(ArmorCacheKey) as IList<DS2.DS2Armor>;
+            if (armors == null || forceUpdate)
+            {
+                using (var lifetime = IoC.Container.BeginLifetimeScope())
+                {
+                    using (var unit = lifetime.Resolve<IUnitOfWork>())
+                    {
+                        armors = unit.GetRepository<DS2.DS2Armor>().Get().ToList();
+                        Add(ArmorCacheKey, armors, null, DateTime.Now.AddHours(6), System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+                    }
+                }
+            }
+
+            if (filter != null)
+            {
+                return armors.Where(filter).ToList();
+            }
+
+            return armors;
         }
 
         public IList<DS2.WeaponCategory> GetWeaponCategories(Func<DS2.WeaponCategory, bool> filter = null, bool forceUpdate = false)

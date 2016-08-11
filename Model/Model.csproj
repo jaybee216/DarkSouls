@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DS2\Armor.cs" />
+    <Compile Include="DS2\ArmorType.cs" />
     <Compile Include="DS2\Character.cs" />
     <Compile Include="DS3\Armor.cs" />
     <Compile Include="DS3\ArmorType.cs" />

@@ -1,4 +1,4 @@
-﻿@using DarkSoulsII.Areas.DS3.ViewModels;
+﻿@using DarkSoulsII.ViewModels;
 
 @model WeaponARModel
 
@@ -22,12 +22,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Requirements</div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-3"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Model.StrReq</div>
-                        <div class="col-sm-3"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Model.DexReq</div>
-                        <div class="col-sm-3"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Model.IntReq</div>
-                        <div class="col-sm-3"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Model.FthReq</div>
-                    </div>
+                    <div class="col-sm-3"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Model.StrReq</div>
+                    <div class="col-sm-3"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Model.DexReq</div>
+                    <div class="col-sm-3"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Model.IntReq</div>
+                    <div class="col-sm-3"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Model.FthReq</div>
                 </div>
             </div>
         </div>
@@ -51,7 +49,7 @@ else
             </thead>
             <tbody>
                 <tr>
-                    <td>@Html.ActionLink(Model.WeaponName, "Details", new { weaponId = Model.WeaponId, upgradeLevel = Model.ReinforcementLevel })</td>
+                    <td>@Html.ActionLink(Model.WeaponName, "Details", new { weaponId = Model.WeaponId })</td>
                     <td class="col-weapon-ar-stats">@Model.TotalAR.ToString("F")</td>
                     <td class="col-weapon-ar-stats">@Model.PhysAR.ToString("F")</td>
                     <td class="col-weapon-ar-stats">@Model.MagicAR.ToString("F")</td>

@@ -17,7 +17,8 @@ namespace DarkSoulsII.Areas.DS3
             context.MapRoute(
                 "DS3_default",
                 "DS3/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "DarkSoulsII.Areas.DS3.Controllers" }
             );
         }
     }
