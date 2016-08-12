@@ -36,21 +36,28 @@
     });
 </script>
 
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="~/Home">Dark Souls II</a></li>
+    <li class="breadcrumb-item"><a href="~/Armor">Armor</a></li>
+    <li class="breadcrumb-item active">@Model.Name</li>
+</ol>
+
 <div class="row">
     <div class="col-sm-6">
         <h2>@Model.Name</h2>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">Details</div>
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h1>Details</h1></div>
             <div class="panel-body">
-                <div class="col-sm-4">
-                    <label>Poise:</label> @Model.Poise
-                </div>
-                <div class="col-sm-4">
-                    <label>Weight:</label> @Model.Weight
-                </div>
-                <div class="col-sm-4">
-                    <label>Durability:</label> @Model.Durability
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Poise:</label> @Model.Poise
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Weight:</label> @Model.Weight
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Durability:</label> @Model.Durability
+                    </div>
                 </div>
             </div>
         </div>

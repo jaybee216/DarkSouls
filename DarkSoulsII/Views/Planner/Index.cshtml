@@ -1,0 +1,221 @@
+﻿@{
+    ViewBag.Title = "Character Planner - Dark Souls II";
+}
+
+<script type="text/javascript">
+    function calculate() {
+        var data = {
+            vit: $('#vit').val(),
+            adp: $('#adp').val(),
+            end: $('#end').val(),
+            rWeapon1: $('#rWeapon1').val(),
+            lWeapon1: $('#lWeapon1').val(),
+            helm: $('#helm').val(),
+            chest: $('#chest').val(),
+            gauntlet: $('#gauntlet').val(),
+            legging: $('#legging').val(),
+            ring1: $('#ring1').val(),
+            ring2: $('#ring2').val(),
+            ring3: $('#ring3').val(),
+            ring4: $('#ring4').val()
+        };
+        $.ajax({
+            url: 'Planner/CalculateEquipBurden',
+            type: 'POST',
+            data: data,
+            success: function (response) {
+                $('#equipLoad').text(response.equipLoad);
+                $('#poise').text(response.poise);
+                $('#results').removeClass('hidden');
+            },
+            complete: function () {
+
+            }
+        });
+    }
+</script>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="~/Home">Dark Souls II</a></li>
+    <li class="breadcrumb-item active">Character Planner</li>
+</ol>
+
+<h2>Character Planner</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Character Stats</div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    @*<div class="form-group row">
+                            <label class="col-lg-3 col-md-4 col-sm-5">Starting Class:</label>
+                            <div class="col-lg-9 col-md-8 col-sm-7">@Html.DropDownList("startingClassId", ViewBag.StartingClasses as IEnumerable<SelectListItem>, new { onchange = "startingClassChanged();", style = "width:100%;" })</div>
+                        </div>*@
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-xs-3" for="vgr">VGR</label>
+                                <div class="col-xs-6">
+                                    @Html.TextBox("vgr", ViewBag.VGR as int?, new { type = "number", min = "0", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-3" for="end">END</label>
+                                <div class="col-xs-6">
+                                    @Html.TextBox("end", ViewBag.END as int?, new { type = "number", min = "0", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-3" for="vit">VIT</label>
+                                <div class="col-xs-6">
+                                    @Html.TextBox("vit", ViewBag.VIT as int?, new { type = "number", min = "0", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-3" for="att">ATT</label>
+                                <div class="col-xs-6">
+                                    @Html.TextBox("att", ViewBag.ATT as int?, new { type = "number", min = "0", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-3" for="adp">ADP</label>
+                                <div class="col-xs-6">
+                                    @Html.TextBox("adp", ViewBag.ADP as int?, new { type = "number", min = "0", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group row">
+                                <label class="col-xs-3" for="str">STR</label>
+                                <div class="col-xs-6">
+                                    @Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-3" for="dex">DEX</label>
+                                <div class="col-xs-6">
+                                    @Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-3" for="int">INT</label>
+                                <div class="col-xs-6">
+                                    @Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xs-3" for="fth">FTH</label>
+                                <div class="col-xs-6">
+                                    @Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Weapons</div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label for="rWeapon1">Right Weapon 1</label>
+                        @Html.DropDownList("rWeapon1", ViewBag.Weapons as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="lWeapon1">Left Weapon 1</label>
+                        @Html.DropDownList("lWeapon1", ViewBag.Weapons as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">Armor</div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label for="helm">Helm</label>
+                        @Html.DropDownList("helm", ViewBag.Helms as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="chest">Chest</label>
+                        @Html.DropDownList("chest", ViewBag.Chests as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="gauntlet">Gauntlets</label>
+                        @Html.DropDownList("gauntlet", ViewBag.Gauntlets as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="legging">Leggings</label>
+                        @Html.DropDownList("legging", ViewBag.Leggings as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading">Rings</div>
+            <div class="panel-body">
+                <form>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="ring1">Ring 1</label>
+                                @Html.DropDownList("ring1", ViewBag.Rings as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="ring2">Ring 2</label>
+                                @Html.DropDownList("ring2", ViewBag.Rings as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="ring3">Ring 3</label>
+                                @Html.DropDownList("ring3", ViewBag.Rings as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="ring4">Ring 4</label>
+                                @Html.DropDownList("ring4", ViewBag.Rings as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<input type="button" class="btn btn-primary pull-right" onclick="calculate()" value="Calculate">*@
+<input class="btn btn-primary pull-right" type="submit" value="Calculate" onclick="calculate()" style="margin-bottom: 10px;">
+  
+<div class="row">
+    <div class="col-xs-12">
+        <div id="results" class="panel panel-success hidden">
+            <div class="panel-heading">Results</div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-xs-3" for="vgr">Equip Load</label>
+                        <div class="col-xs-6">
+                            <label id="equipLoad"></label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xs-3" for="vgr">Poise</label>
+                        <div class="col-xs-6">
+                            <label id="poise"></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

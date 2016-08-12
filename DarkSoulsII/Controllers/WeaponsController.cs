@@ -13,7 +13,7 @@ namespace DarkSoulsII.Controllers
         //private readonly StatsHelper _statsHelper = new StatsHelper();
 
         // GET: DS3/Weapons
-        public ActionResult Index(string searchValue = "", int weaponTypeId = 0, int infusionId = 1,
+        public ActionResult Index(string searchValue = "", int weaponTypeId = 0, int infusionId = 6,
                                   double? weight = null, int? STR = null, int? DEX = null, int? INT = null, int? FTH = null)
         {
             searchValue = (searchValue == null) ? "" : searchValue.Trim();

@@ -9,10 +9,7 @@
     @Scripts.Render("~/bundles/jqueryUI")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/bootstrap")
-    @*@Scripts.Render("~/Scripts/knockout-3.3.0.js")*@
     @Scripts.Render("~/bundles/datatables")
-    @*@Scripts.Render("~/Scripts/Shared/layout.js")*@
-    @*<script type="text/javascript" src="js/bootstrap/bootstrap-dropdown.js"></script>*@
     <script>
         $(document).ready(function () {
             $('.dropdown-toggle').dropdown()
@@ -36,19 +33,6 @@
                 </a>
                 @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            @*<div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Weapons", "Weapons", "Equipment", new { area = "" }, new { })</li>
-                        <li>@Html.ActionLink("AR Calculator", "ARCalculator", "Equipment", new { area = "" }, new { })</li>
-
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-                                <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
-                        }
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>*@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
@@ -66,6 +50,7 @@
                             <li>@Html.ActionLink("AR Calculator", "ARCalculator", "Weapons", new { area = "" }, new { })</li>
                             <li>@Html.ActionLink("Weapon Search", "Index", "Weapons", new { area = "" }, new { })</li>
                             <li>@Html.ActionLink("Armor Search", "Index", "Armor", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("Character Planner", "Index", "Planner", new { area = "" }, null)</li>
                         </ul>
                     </li>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
@@ -87,7 +72,7 @@
         @RenderBody()
         <hr />
         <footer>
-            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+            <p class="pull-right">&copy; @DateTime.Now.Year by negator13</p>
         </footer>
     </div>
     @RenderSection("scripts", required: false)

@@ -33,7 +33,6 @@ namespace DarkSoulsII
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/Datatables/css/dataTables.bootstrap.css"
-                      //"~/Content/DataTables/css/jquery.dataTables.css"
                     ));
         }
     }

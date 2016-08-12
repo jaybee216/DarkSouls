@@ -38,23 +38,28 @@
         document.armorSearchForm.submit();
     }
 
-    var totalPoise = 0;
-    var totalWeight = 0;
+    //var totalPoise = 0;
+    //var totalWeight = 0;
 
-    function addArmor(weight, poise) {
-        totalPoise = Number(totalPoise) + Number(poise);
-        totalWeight = Number(totalWeight) + Number(weight);
-        $('#lblWeight').text(totalWeight);
-        $('#lblPoise').text(totalPoise);
-    }
+    //function addArmor(weight, poise) {
+    //    totalPoise = Number(totalPoise) + Number(poise);
+    //    totalWeight = Number(totalWeight) + Number(weight);
+    //    $('#lblWeight').text(totalWeight);
+    //    $('#lblPoise').text(totalPoise);
+    //}
 
-    function removeArmor(weight, poise) {
-        totalPoise = Number(totalPoise) - Number(poise);
-        totalWeight = Number(totalWeight) - Number(weight);
-        $('#lblWeight').text(totalWeight);
-        $('#lblPoise').text(totalPoise);
-    }
+    //function removeArmor(weight, poise) {
+    //    totalPoise = Number(totalPoise) - Number(poise);
+    //    totalWeight = Number(totalWeight) - Number(weight);
+    //    $('#lblWeight').text(totalWeight);
+    //    $('#lblPoise').text(totalPoise);
+    //}
 </script>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="~/Home">Dark Souls II</a></li>
+    <li class="breadcrumb-item active">Armor</li>
+</ol>
 
 <h4>Armor Search Utility</h4>
 
@@ -99,8 +104,8 @@
     </div>
 }
 
-Total Weight: <label id="lblWeight"></label>
-Total Poise: <label id="lblPoise"></label>
+@*Total Weight: <label id="lblWeight"></label>
+Total Poise: <label id="lblPoise"></label>*@
 
 <div class="table-responsive">
     <table id="armorResultsTable" class="table table-striped table-bordered" cellspacing="0">
@@ -109,7 +114,7 @@ Total Poise: <label id="lblPoise"></label>
                 <td colspan="1"></td>
                 <td colspan="8" style="text-align:center;"><label>Defenses</label></td>
                 <td colspan="4"></td>
-                <td colspan="2"></td>
+                @*<td colspan="2"></td>*@
             </tr>
             <tr>
                 <td><label>Name</label></td>
@@ -125,8 +130,8 @@ Total Poise: <label id="lblPoise"></label>
                 <td class="col-armor-search-stats"><img src="~/Content/Images/Poise.png" data-toggle="tooltip" title="Poise" /></td>
                 <td class="col-armor-search-stats"><label data-toggle="tooltip" title="Poise:Weight">P:W</label></td>
                 <td class="col-armor-search-stats"><label data-toggle="tooltip" title="Defense:Weight">D:W</label></td>
-                <td class="col-armor-search-stats"></td>
-                <td class="col-armor-search-stats"></td>
+                @*<td class="col-armor-search-stats"></td>
+                <td class="col-armor-search-stats"></td>*@
             </tr>
         </thead>
         <tbody>
@@ -148,8 +153,8 @@ Total Poise: <label id="lblPoise"></label>
                         <td class="col-armor-search-stats">@a.Poise</td>
                         <td class="col-armor-search-stats">@a.PoiseToWeight.ToString("N2")</td>
                         <td class="col-armor-search-stats">@a.DefenseToWeight.ToString("N2")</td>
-                        <td class="col-armor-search-stats"><input type="button" onclick="addArmor('@a.Weight', '@a.Poise')" value="Select" /></td>
-                        <td class="col-armor-search-stats"><input type="button" onclick="removeArmor('@a.Weight', '@a.Poise')" value="Remove" /></td>
+                        @*<td class="col-armor-search-stats"><input type="button" onclick="addArmor('@a.Weight', '@a.Poise')" value="Select" /></td>
+                        <td class="col-armor-search-stats"><input type="button" onclick="removeArmor('@a.Weight', '@a.Poise')" value="Remove" /></td>*@
                     </tr>
                 }
             }

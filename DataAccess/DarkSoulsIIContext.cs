@@ -36,6 +36,8 @@ namespace DataAccess
         public DbSet<DS2.WeaponCategory> WeaponCategories { get; set; }
         public DbSet<DS2.WeaponAttackValues> WeaponAttackValues { get; set; }
         public DbSet<DS2.Infusion> Infusions { get; set; }
+        public DbSet<DS2.Ring> Rings { get; set; }
+        public DbSet<DS2.Effect> Effects { get; set; }
         #endregion
 
         #region DS3
@@ -62,6 +64,8 @@ namespace DataAccess
             modelBuilder.Entity<DS2.DS2ArmorType>().ToTable("ArmorType", "dbo");
             modelBuilder.Entity<DS2.DS2Weapon>().ToTable("Weapon", "dbo");
             modelBuilder.Entity<DS2.Infusion>().ToTable("Infusion", "dbo");
+            modelBuilder.Entity<DS2.Ring>().ToTable("Ring", "dbo");
+            modelBuilder.Entity<DS2.Effect>().ToTable("Effect", "dbo");
 
             modelBuilder.Entity<DS3.Weapon>().ToTable("Weapon", "DS3");
             modelBuilder.Entity<DS3.WeaponType>().ToTable("WeaponType", "DS3");

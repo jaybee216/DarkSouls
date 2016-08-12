@@ -13,9 +13,7 @@ using System.Net.Mail;
 using System.Configuration;
 using System.Net;
 using DataAccess;
-//using Models;
 using Model;
-using Model.DS2;
 
 namespace DarkSoulsII
 {

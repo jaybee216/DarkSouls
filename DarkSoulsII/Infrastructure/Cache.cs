@@ -18,6 +18,7 @@ namespace DarkSoulsII.Infrastructure
         private const string WeaponCategoriesCacheKey = "Global_WeaponCategories";
         private const string WeaponsCacheKey = "Global_Weapons";
         private const string InfusionsCacheKey = "Global_Infusions";
+        private const string RingsCacheKey = "Global_Rings";
 
         private const string DS3WeaponTypesCacheKey = "Global_DS3_WeaponTypes";
         private const string DS3WeaponsCacheKey = "Global_DS3_Weapons";
@@ -186,6 +187,29 @@ namespace DarkSoulsII.Infrastructure
             }
 
             return infusions;
+        }
+
+        public IList<DS2.Ring> GetRings(Func<DS2.Ring, bool> filter = null, bool forceUpdate = false)
+        {
+            var rings = Get(RingsCacheKey) as IList<DS2.Ring>;
+            if (rings == null || forceUpdate)
+            {
+                using (var lifetime = IoC.Container.BeginLifetimeScope())
+                {
+                    using (var unit = lifetime.Resolve<IUnitOfWork>())
+                    {
+                        rings = unit.GetRepository<DS2.Ring>().Get(null, null, "Effects").ToList();
+                        Add(RingsCacheKey, rings, null, DateTime.Now.AddHours(6), System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+                    }
+                }
+            }
+
+            if (filter != null)
+            {
+                return rings.Where(filter).ToList();
+            }
+
+            return rings;
         }
 
         public IList<DS3.WeaponType> GetDS3WeaponTypes(Func<DS3.WeaponType, bool> filter = null, bool forceUpdate = false)

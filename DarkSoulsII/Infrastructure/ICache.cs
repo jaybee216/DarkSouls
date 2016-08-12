@@ -18,6 +18,7 @@ namespace DarkSoulsII.Infrastructure
         IList<Model.DS2.WeaponCategory> GetWeaponCategories(Func<Model.DS2.WeaponCategory, bool> filter = null, bool forceUpdate = false);
         IList<Model.DS2.DS2Weapon> GetWeapons(Func<Model.DS2.DS2Weapon, bool> filter = null, bool forceUpdate = false);
         IList<Model.DS2.Infusion> GetInfusions(Func<Model.DS2.Infusion, bool> filter = null, bool forceUpdate = false);
+        IList<Model.DS2.Ring> GetRings(Func<Model.DS2.Ring, bool> filter = null, bool forceUpdate = false);
 
         IList<Model.DS3.WeaponType> GetDS3WeaponTypes(Func<Model.DS3.WeaponType, bool> filter = null, bool forceUpdate = false);
         IList<Model.DS3.Weapon> GetDS3Weapons(Func<Model.DS3.Weapon, bool> filter = null, bool forceUpdate = false);

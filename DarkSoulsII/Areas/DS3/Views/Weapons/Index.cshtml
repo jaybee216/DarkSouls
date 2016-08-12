@@ -39,6 +39,11 @@
     }
 </script>
 
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="~/Home">Dark Souls III</a></li>
+    <li class="breadcrumb-item active">Weapons</li>
+</ol>
+
 <h4>Weapon Search Utility</h4>
 
 @using (Html.BeginForm("Index", "Weapons", FormMethod.Get, new { name = "weaponSearchForm", @class = "form" }))
@@ -97,9 +102,6 @@
     </div>
 }
 
-@*<div class="panel panel-default">
-    <div class="panel-heading">Results</div>
-    <div class="panel-body">*@
 <div class="table-responsive">
     <table id="weaponResultsTable" class="table table-striped table-bordered" cellspacing="0">
         <thead>
@@ -160,5 +162,3 @@
         </tbody>
     </table>
 </div>
-@*</div>
-    </div>*@
