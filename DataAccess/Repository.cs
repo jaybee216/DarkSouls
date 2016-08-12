@@ -79,7 +79,7 @@ namespace DataAccess
         {
             if (string.IsNullOrEmpty(orderBy))
             {
-                ArgumentException ex = new ArgumentException("Order By is required for paged results.");
+                ArgumentException ex = new ArgumentException("orderBy is required for paged results.");
                 throw ex;
             }
 
@@ -130,7 +130,7 @@ namespace DataAccess
         {
             if (orderBy == null)
             {
-                ArgumentException ex = new ArgumentException("Order By is required for paged results.");
+                ArgumentException ex = new ArgumentException("orderBy is required for paged results.");
                 throw ex;
             }
 
@@ -181,7 +181,7 @@ namespace DataAccess
         {
             if (orderBy == null)
             {
-                ArgumentException ex = new ArgumentException("Order By is required for paged results.");
+                ArgumentException ex = new ArgumentException("orderBy is required for paged results.");
                 throw ex;
             }
 

@@ -8,10 +8,5 @@ namespace DarkSoulsII.Controllers
         {
             return View();
         }
-
-        public ActionResult MyCharacters()
-        {
-            return View();
-        }
     }
 }

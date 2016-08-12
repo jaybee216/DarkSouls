@@ -69,14 +69,12 @@
     <Compile Include="DS3\UpgradePath.cs" />
     <Compile Include="DS3\Weapon.cs" />
     <Compile Include="DS3\WeaponType.cs" />
-    <Compile Include="DS3\WeaponValues.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="DS2\Infusion.cs" />
     <Compile Include="DS2\PlayerAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DS2\Ring.cs" />
     <Compile Include="DS2\DS2Weapon.cs" />
-    <Compile Include="DS2\WeaponAttackValues.cs" />
     <Compile Include="DS2\WeaponCategory.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -50,51 +50,69 @@
 {
     <div class="row">
         <div class="col-sm-6">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Search Terms</div>
                 <div class="panel-body">
-                    <div class="form-group row">
-                        <label class="col-sm-1">Type:</label>
-                        <div class="col-sm-7">@Html.DropDownList("weaponTypeId", ViewBag.WeaponTypes as IEnumerable<SelectListItem>, new { onchange = "searchChanged();", style = "width:100%;" })</div>
+                    <div class="form-group">
+                        <label for="weaponTypeId">Type:</label>
+                        @Html.DropDownList("weaponTypeId", ViewBag.WeaponTypes as IEnumerable<SelectListItem>, new { onchange = "searchChanged();", @class = "form-control" })
                     </div>
-                    <div class="row">
-                        <label class="col-sm-6">Name (contains):</label>
+                    <div class="form-group">
+                        <label for="searchValue">Name (contains):</label>
+                        @Html.TextBox("searchValue", ViewBag.SearchValue as string, new { @class = "form-control" })
                     </div>
-                    <div class="form-group row">
-                        <div class="col-sm-8">@Html.TextBox("searchValue", ViewBag.SearchValue as string, new { style = "width:100%;" })</div>
-                    </div>
-                    <div class="form-group row">
-                        @*<label class="col-sm-3">Upgrade Level:</label>
-                            <div class="col-sm-5">@Html.DropDownList("upgradeLevel", ViewBag.ReinforcementLevels as IEnumerable<SelectListItem>, new { onchange = "searchChanged();", style = "width:100%;" })</div>*@
-                        <div class="col-sm-offset-9 col-sm-3">
-                            <button type="submit" class="btn btn-secondary" onclick="searchChanged();" style="width:100%;">Search</button>
-                        </div>
-                    </div>
+                    <input type="button" class="btn btn-primary pull-right" onclick="searchChanged();" value="Search">
                 </div>
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">Additional Filters</div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-sm-6">Max Requirements:</label>
+                <div class="panel-body form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-sm-12">Max Requirements:</label>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <label for="str" class="col-xs-2 control-label"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /></label>
+                                <div class="col-xs-8 col-sm-7 col-md-6">
+                                    @Html.TextBox("str", ViewBag.STR as int?, new { @class = "form-control", type = "number", min = "0" })
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-3"><img src="~/Content/Images/STR.png" data-toggle="tooltip" title="Strength" /> @Html.TextBox("str", ViewBag.STR as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                            <div class="col-sm-3"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /> @Html.TextBox("dex", ViewBag.DEX as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                            <div class="col-sm-3"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /> @Html.TextBox("int", ViewBag.INT as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
-                            <div class="col-sm-3"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /> @Html.TextBox("fth", ViewBag.FTH as int?, new { type = "number", min = "0", style = "width:50px;" })</div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <label for="dex" class="col-xs-2 control-label"><img src="~/Content/Images/DEX.png" data-toggle="tooltip" title="Dexterity" /></label>
+                                <div class="col-xs-8 col-sm-7 col-md-6">
+                                    @Html.TextBox("dex", ViewBag.DEX as int?, new { @class = "form-control", type = "number", min = "0" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <label for="int" class="col-xs-2 control-label"><img src="~/Content/Images/INT.png" data-toggle="tooltip" title="Intelligence" /></label>
+                                <div class="col-xs-8 col-sm-7 col-md-6">
+                                    @Html.TextBox("int", ViewBag.INT as int?, new { @class = "form-control", type = "number", min = "0" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <label for="fth" class="col-xs-2 control-label"><img src="~/Content/Images/FTH.png" data-toggle="tooltip" title="Faith" /></label>
+                                <div class="col-xs-8 col-sm-7 col-md-6">
+                                    @Html.TextBox("fth", ViewBag.FTH as int?, new { @class = "form-control", type = "number", min = "0" })
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3">Max Weight:</label>
-                        <div class="col-sm-3">@Html.TextBox("weight", ViewBag.Weight as decimal?, new { type = "number", min = "0", style = "width:100%;" })</div>
+                        <label for="weight" class="col-xs-5 col-md-4">Max Weight:</label>
+                        <div class="col-xs-6">@Html.TextBox("weight", ViewBag.Weight as decimal?, new { type = "number", min = "0", @class = "form-control" })</div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3">Infusion:</label>
-                        <div class="col-sm-5">@Html.DropDownList("infusionId", ViewBag.InfusionTypes as IEnumerable<SelectListItem>, new { style = "width:100%;" })</div>
+                        <label for="infusionId" class="col-xs-5 col-md-4">Infusion:</label>
+                        <div class="col-xs-6">@Html.DropDownList("infusionId", ViewBag.InfusionTypes as IEnumerable<SelectListItem>, new { @class = "form-control" })</div>
                     </div>
                 </div>
             </div>
@@ -103,7 +121,7 @@
 }
 
 <div class="table-responsive">
-    <table id="weaponResultsTable" class="table table-striped table-bordered" cellspacing="0">
+    <table id="weaponResultsTable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0">
         <thead>
             <tr>
                 <td colspan="1"></td>
@@ -139,7 +157,7 @@
                 foreach (WeaponViewModel w in Model)
                 {
                     <tr>
-                        <td style="font-size:12px;">@Html.ActionLink(w.Name, "Details", new { weaponId = w.WeaponId })</td>
+                        <td style="font-size:12px;">@Html.ActionLink(w.Name, "Details", new { weaponId = w.WeaponId }, new { target = "_blank" })</td>
                         <td class="col-weapon-search-stats">@w.BasePhysical</td>
                         <td class="col-weapon-search-stats">@w.BaseMagic</td>
                         <td class="col-weapon-search-stats">@w.BaseFire</td>

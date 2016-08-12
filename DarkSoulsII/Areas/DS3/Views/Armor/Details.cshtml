@@ -31,7 +31,7 @@
 <div class="media">
     <div class="media-body">
         <div class="panel panel-primary">
-            <div class="panel-heading"><h4>Details</h4></div>
+            <div class="panel-heading"><h5>Details</h5></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -53,51 +53,48 @@
 </div>
 
 <h3>Armor Stats:</h3>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="table-responsive">
-            <table id="statsTable" class="table table-striped table-bordered" cellspacing="0">
-                <thead>
-                    <tr>
-                        <td colspan="1"></td>
-                        <td colspan="4" style="text-align:center;"><label>Physical Defenses</label></td>
-                        <td colspan="4" style="text-align:center;"><label>Elemental Defenses</label></td>
-                        <td colspan="4" style="text-align:center;"><label>Resistances</label></td>
-                    </tr>
-                    <tr>
-                        <td><label>Name</label></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/PhysDef.png" data-toggle="tooltip" title="Physical" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/SlashDef.png" data-toggle="tooltip" title="Slash" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/StrikeDef.png" data-toggle="tooltip" title="Strike" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/ThrustDef.png" data-toggle="tooltip" title="Thrust" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/MagicDef.png" data-toggle="tooltip" title="Magic" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/FireDef.png" data-toggle="tooltip" title="Fire" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/LightningDef.png" data-toggle="tooltip" title="Lightning" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/DarkDef.png" data-toggle="tooltip" title="Dark" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/BleedRes.png" data-toggle="tooltip" title="Bleed" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/CurseRes.png" data-toggle="tooltip" title="Curse" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/FrostRes.png" data-toggle="tooltip" title="Frost" /></td>
-                        <td class="col-armor-details-stats"><img src="~/Content/Images/PoisonRes.png" data-toggle="tooltip" title="Poison" /></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@Model.Name</td>
-                        <td class="col-armor-details-stats">@Model.Physical</td>
-                        <td class="col-armor-details-stats">@Model.Slash</td>
-                        <td class="col-armor-details-stats">@Model.Strike</td>
-                        <td class="col-armor-details-stats">@Model.Thrust</td>
-                        <td class="col-armor-details-stats">@Model.Magic</td>
-                        <td class="col-armor-details-stats">@Model.Fire</td>
-                        <td class="col-armor-details-stats">@Model.Lightning</td>
-                        <td class="col-armor-details-stats">@Model.Dark</td>
-                        <td class="col-armor-details-stats">@Model.Blood</td>
-                        <td class="col-armor-details-stats">@Model.Curse</td>
-                        <td class="col-armor-details-stats">@Model.Frost</td>
-                        <td class="col-armor-details-stats">@Model.Poison</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+<div class="table-responsive">
+    <table id="statsTable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+        <thead>
+            <tr>
+                <td colspan="1"></td>
+                <td colspan="4" style="text-align:center;"><label>Physical Defenses</label></td>
+                <td colspan="4" style="text-align:center;"><label>Elemental Defenses</label></td>
+                <td colspan="4" style="text-align:center;"><label>Resistances</label></td>
+            </tr>
+            <tr>
+                <td><label>Name</label></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/PhysDef.png" data-toggle="tooltip" title="Physical" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/SlashDef.png" data-toggle="tooltip" title="Slash" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/StrikeDef.png" data-toggle="tooltip" title="Strike" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/ThrustDef.png" data-toggle="tooltip" title="Thrust" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/MagicDef.png" data-toggle="tooltip" title="Magic" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/FireDef.png" data-toggle="tooltip" title="Fire" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/LightningDef.png" data-toggle="tooltip" title="Lightning" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/DarkDef.png" data-toggle="tooltip" title="Dark" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/BleedRes.png" data-toggle="tooltip" title="Bleed" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/CurseRes.png" data-toggle="tooltip" title="Curse" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/FrostRes.png" data-toggle="tooltip" title="Frost" /></td>
+                <td class="col-armor-details-stats"><img src="~/Content/Images/PoisonRes.png" data-toggle="tooltip" title="Poison" /></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Name</td>
+                <td class="col-armor-details-stats">@Model.Physical</td>
+                <td class="col-armor-details-stats">@Model.Slash</td>
+                <td class="col-armor-details-stats">@Model.Strike</td>
+                <td class="col-armor-details-stats">@Model.Thrust</td>
+                <td class="col-armor-details-stats">@Model.Magic</td>
+                <td class="col-armor-details-stats">@Model.Fire</td>
+                <td class="col-armor-details-stats">@Model.Lightning</td>
+                <td class="col-armor-details-stats">@Model.Dark</td>
+                <td class="col-armor-details-stats">@Model.Blood</td>
+                <td class="col-armor-details-stats">@Model.Curse</td>
+                <td class="col-armor-details-stats">@Model.Frost</td>
+                <td class="col-armor-details-stats">@Model.Poison</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
