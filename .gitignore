@@ -252,5 +252,6 @@ paket-files/
 *.sln.iml
 /DarkSoulsII/PrivateSettings.config
 /DarkSoulsII/ConnectionStrings.config
+/DarkSoulsII/log4net.config
 /DarkSoulsIII
 /DarkSoulsDb/DarkSoulsDb.jfm

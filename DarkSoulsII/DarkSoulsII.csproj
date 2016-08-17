@@ -483,7 +483,6 @@
     <Content Include="Areas\DS3\Views\Weapons\Details.cshtml" />
     <Content Include="Areas\DS3\Views\Weapons\_ARValues.cshtml" />
     <Content Include="Areas\DS3\Views\Weapons\ARCalculator.cshtml" />
-    <Content Include="Areas\DS3\Views\Planner\Index.cshtml" />
     <Content Include="Areas\DS3\Views\Armor\Index.cshtml" />
     <Content Include="Areas\DS3\Views\Armor\Details.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -498,6 +497,9 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="log4net.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\negator13.pubxml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -568,7 +570,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\DS3\Controllers\ArmorController.cs" />
-    <Compile Include="Areas\DS3\Controllers\PlannerController.cs" />
     <Compile Include="Areas\DS3\Controllers\WeaponsController.cs" />
     <Compile Include="Areas\DS3\DS3AreaRegistration.cs" />
     <Compile Include="Areas\DS3\Helpers\StatsHelper.cs" />
@@ -578,6 +579,7 @@
     <Compile Include="Areas\DS3\ViewModels\WeaponARModel.cs" />
     <Compile Include="Areas\DS3\ViewModels\ArmorViewModel.cs" />
     <Compile Include="Areas\DS3\ViewModels\WeaponViewModel.cs" />
+    <Compile Include="Attributes\ExceptionLoggingFilter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArmorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -611,7 +613,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Home\MyCharacters.cshtml" />
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
     <Content Include="Views\Armor\Details.cshtml" />
@@ -639,6 +640,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\DS3\Models\" />
+    <Folder Include="Areas\DS3\Views\Planner\" />
     <Folder Include="Areas\DS3\Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>

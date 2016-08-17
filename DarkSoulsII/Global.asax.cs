@@ -2,6 +2,7 @@
 using System.Web.Optimization;
 using System.Web.Routing;
 using DarkSoulsII.Infrastructure;
+using log4net;
 
 namespace DarkSoulsII
 {
@@ -11,8 +12,11 @@ namespace DarkSoulsII
     {
         protected void Application_Start()
         {
+            log4net.Config.XmlConfigurator.Configure();
+            var logger = LogManager.GetLogger("GlobalLogger");
+
             AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, logger);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 

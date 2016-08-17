@@ -31,19 +31,19 @@
     <li class="breadcrumb-item active">@Model.Normal.Name</li>
 </ol>
 
-@if (string.IsNullOrEmpty(Model.Normal.UpgradePath))
-{
-    <h2>@Model.Normal.Name</h2>
-}
-else
-{
-    <h2>@Model.Normal.Name (+@(Model.Normal.UpgradePath == "Normal" ? Model.Normal.UpgradeLevel : Model.Normal.UpgradeLevel / 2))</h2>
-}
-
 <div class="media">
     <div class="media-body">
         <div class="panel panel-primary">
-            <div class="panel-heading"><h4>Details</h4></div>
+            <div class="panel-heading">
+                @if (string.IsNullOrEmpty(Model.Normal.UpgradePath))
+                {
+                    <h5>@Model.Normal.Name</h5>
+                }
+                else
+                {
+                    <h5>@Model.Normal.Name (+@(Model.Normal.UpgradePath == "Normal" ? Model.Normal.UpgradeLevel : Model.Normal.UpgradeLevel / 2))</h5>
+                }
+            </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-6">

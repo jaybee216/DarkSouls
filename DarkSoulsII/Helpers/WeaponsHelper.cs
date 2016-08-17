@@ -81,7 +81,7 @@ namespace DarkSoulsII.Helpers
             //    }
             //}
             List<SelectListItem> infusionSelectList = infusionTypes
-            .OrderBy(i => i.InfusionId)
+            .OrderBy(i => i.DisplayOrder)
             .Select(i => new SelectListItem()
             {
                 Selected = i.InfusionId == infusionId,

@@ -157,7 +157,7 @@
                 foreach (WeaponViewModel w in Model)
                 {
                     <tr>
-                        <td style="font-size:12px;">@Html.ActionLink(w.Name, "Details", new { weaponId = w.WeaponId, upgradeLevel = w.UpgradeLevel }, new { target = "_blank" })</td>
+                        <td style="font-size:12px;">@Html.ActionLink(w.Name, "Details", new { weaponId = w.WeaponId, upgradeLevel = w.UpgradeLevel })</td>
                         <td class="col-weapon-search-stats">@w.Physical</td>
                         <td class="col-weapon-search-stats">@w.Magic</td>
                         <td class="col-weapon-search-stats">@w.Fire</td>

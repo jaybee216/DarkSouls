@@ -117,7 +117,7 @@
                 foreach (ArmorViewModel a in Model)
                 {
                     <tr>
-                        <td>@Html.ActionLink(a.Name, "Details", new { armorId = a.ArmorId }, new { target = "_blank" })</td>
+                        <td>@Html.ActionLink(a.Name, "Details", new { armorId = a.ArmorId })</td>
                         <td class="col-armor-search-stats">@a.Physical</td>
                         <td class="col-armor-search-stats">@a.Slash</td>
                         <td class="col-armor-search-stats">@a.Strike</td>
